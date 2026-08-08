@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Discovery Loop — Jeff Dean 新公司一手信源专题</title>
-<meta name="description" content="Jeff Dean 新公司 Discovery Loop 一手信源专题：告别信原文、BP 图解、融资结构、时间线、华人创业者与深度分析。">
-<meta property="og:title" content="Discovery Loop — Jeff Dean 新公司一手信源专题">
-<meta property="og:description" content="自动化实验循环：AI 研究 AI 的正循环起点。BP 三页图解 + 一手信源分析。">
+<title>Discovery Loop — Jeff Dean 新公司深度解读</title>
+<meta name="description" content="Jeff Dean 新公司 Discovery Loop 深度解读：告别信原文、BP 图解、融资结构、时间线、华人创业者与九个判断。">
+<meta property="og:title" content="Discovery Loop — Jeff Dean 新公司深度解读">
+<meta property="og:description" content="自动化实验循环：AI 研究 AI 的正循环起点。告别信原文 + BP 图解 + 九个判断。">
 <meta property="og:type" content="article">
 <style>
 :root{
@@ -190,6 +190,17 @@ td .ok{color:var(--green)}td .warn{color:var(--yellow)}td .bad{color:var(--red)}
 .letter-quote .lq{font-size:14.5px;color:var(--ink-dim);line-height:1.8}
 .letter-quote .lq b{color:var(--gold-bright)}
 .letter-quote .lq-src{margin-top:8px;font-size:12px;color:var(--ink-faint)}
+/* ===== FOLD ===== */
+details.fold{background:var(--card2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:0;margin:18px 0}
+details.fold summary{cursor:pointer;padding:14px 18px;font-size:13.5px;font-weight:600;color:var(--gold-bright);list-style:none;display:flex;align-items:center;gap:8px}
+details.fold summary::-webkit-details-marker{display:none}
+details.fold summary::before{content:"▸";transition:transform .2s;color:var(--gold)}
+details.fold[open] summary::before{transform:rotate(90deg)}
+details.fold .table-wrap{margin:0 18px 18px}
+details.fold .callout{margin:0 18px 18px;border-radius:var(--radius-sm)}
+details.fold-inline{margin-top:10px;font-size:13px}
+details.fold-inline summary{cursor:pointer;color:var(--gold-bright);font-size:12.5px;opacity:.85;display:inline-block;padding:4px 0}
+details.fold-inline summary:hover{opacity:1}
 /* ===== WATCHLIST ===== */
 .watch-item{display:flex;gap:16px;padding:16px 4px;border-bottom:1px solid var(--line);align-items:flex-start}
 .watch-item:last-child{border-bottom:none}
@@ -246,7 +257,7 @@ footer b{color:var(--ink-dim)}
 <!-- ===== NAV ===== -->
 <nav>
   <div class="nav-inner">
-    <div class="nav-brand">Discovery Loop<span>一手信源</span></div>
+    <div class="nav-brand">Discovery Loop<span>深度解读</span></div>
     <div class="nav-links" id="navLinks">
       <a href="#founders" data-sec="founders">创始人</a>
       <a href="#thesis" data-sec="thesis">核心命题</a>
@@ -264,9 +275,9 @@ footer b{color:var(--ink-dim)}
   </div>
 </nav>
 
-<!-- ============ HERO ============ -->
+
 <header class="hero">
-  <div class="hero-badge"><span class="dot"></span>一手信源专题 · 2026-08-08</div>
+  <div class="hero-badge"><span class="dot"></span>深度解读 · 2026-08-08</div>
   <h1>Discovery Loop</h1>
   <div class="sub">Continuous Exploration · 持续探索</div>
   <p class="tagline">用 AI 自动化科学发现的实验循环 —— <em>“Automating discovery to accelerate science and engineering for the world.”</em></p>
@@ -278,7 +289,7 @@ footer b{color:var(--ink-dim)}
   <div class="scroll-hint">向下滚动</div>
 </header>
 
-<!-- ============ 01. 创始人 ============ -->
+
 <section id="founders">
   <div class="wrap">
     <div class="sec-head">
@@ -327,7 +338,7 @@ footer b{color:var(--ink-dim)}
   </div>
 </section>
 
-<!-- ============ 02. 核心命题（合并 overview + thesis） ============ -->
+
 <section id="thesis">
   <div class="wrap">
     <div class="sec-head">
@@ -355,17 +366,17 @@ footer b{color:var(--ink-dim)}
     </div>
     <div class="grid g2" style="margin-top:18px">
       <div class="bp-card">
-        <div class="frame" data-lb="loop_diagram.webp" data-cap="自动化实验循环流程图（Jeff Dean X 推文一手截图）"><span class="zoom-hint">🔍 点击放大</span><img src="loop_diagram.webp" alt="自动化实验循环流程图" width="1150" height="642"></div>
+        <div class="frame" data-lb="loop_diagram.webp" data-cap="自动化实验循环流程图（Jeff Dean X 推文截图）"><span class="zoom-hint">🔍 点击放大</span><img src="loop_diagram.webp" alt="自动化实验循环流程图" width="1150" height="642"></div>
         <div class="body">
-          <div class="num">一手原图</div>
+          <div class="num">原图</div>
           <h3>多学科通用循环</h3>
           <p>提出实验 → 实施运行 → 评估 → 反馈回环——「自动化该循环」正是 Discovery Loop 的方法论。图源 Jeff Dean X 推文。</p>
         </div>
       </div>
       <div class="bp-card">
-        <div class="frame" data-lb="nae_challenges.webp" data-cap="14 项 NAE Grand Challenges（Jeff Dean X 推文一手截图）"><span class="zoom-hint">🔍 点击放大</span><img src="nae_challenges.webp" alt="NAE 14 项大挑战" width="1146" height="646"></div>
+        <div class="frame" data-lb="nae_challenges.webp" data-cap="14 项 NAE Grand Challenges（Jeff Dean X 推文截图）"><span class="zoom-hint">🔍 点击放大</span><img src="nae_challenges.webp" alt="NAE 14 项大挑战" width="1146" height="646"></div>
         <div class="body">
-          <div class="num">一手原图</div>
+          <div class="num">原图</div>
           <h3>NAE 14 项大挑战</h3>
           <p>告别信明确提到「对 NAE Grand Challenge 问题做出有意义进展」——这张图正是 Dean 推文配图：14 项挑战的完整清单。</p>
         </div>
@@ -379,13 +390,13 @@ footer b{color:var(--ink-dim)}
   </div>
 </section>
 
-<!-- ============ 03. 告别信（一手原图） ============ -->
+
 <section id="letter">
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-no">03</span>
-      <h2 class="sec-title">告别信：Jeff Dean 一手原话</h2>
-      <p class="sec-sub">2026-08-06 离职日，Jeff Dean 在 X 发布的告别信截图（用户一手提供）。这是公司成立动机的最权威陈述——比任何媒体转述都更原始。点击图片可放大阅读原文。</p>
+      <h2 class="sec-title">告别信：Jeff Dean 原话</h2>
+      <p class="sec-sub">2026-08-06 离职日，Jeff Dean 在 X 发布的告别信截图（用户提供）。这是公司成立动机的最权威陈述——比任何媒体转述都更原始。点击图片可放大阅读原文。</p>
     </div>
     <div class="letter-grid">
       <div class="letter-item">
@@ -407,10 +418,10 @@ footer b{color:var(--ink-dim)}
     </div>
     <div class="letter-quote">
       <div class="lq"><b>"</b>My longtime friends and collaborators Sanjay Ghemawat, Oriol Vinyals and Quoc Le and I have been excitedly discussing how AI collaborators can help discover new things with the right kinds of automated loops&hellip; we've decided to leave Google to co-found <b>Discovery Loop</b>, a new public benefit corporation whose mission is to automate machine learning, science, and engineering to accelerate discoveries and progress&hellip; we believe this approach can make meaningful progress against many of the <b>NAE Grand Challenge</b> problems<b>"</b></div>
-      <div class="lq-src">—— Jeff Dean 告别信原文（2026-08-06）· 用户 X 推文一手截图</div>
+      <div class="lq-src">—— Jeff Dean 告别信原文（2026-08-06）· 用户 X 推文截图</div>
     </div>
     <div class="bp-card" style="margin-top:18px">
-      <div class="frame" data-lb="dean_pichai.webp" data-cap="Jeff Dean 与 Sundar Pichai 击掌合影（X 推文一手截图）"><span class="zoom-hint">🔍 点击放大</span><img src="dean_pichai.webp" alt="Jeff Dean 与 Pichai 击掌合影" width="1922" height="1079"></div>
+      <div class="frame" data-lb="dean_pichai.webp" data-cap="Jeff Dean 与 Sundar Pichai 击掌合影（X 推文截图）"><span class="zoom-hint">🔍 点击放大</span><img src="dean_pichai.webp" alt="Jeff Dean 与 Pichai 击掌合影" width="1922" height="1079"></div>
       <div class="body">
         <div class="num">团队文化</div>
         <h3>与 Pichai 击掌告别</h3>
@@ -420,13 +431,13 @@ footer b{color:var(--ink-dim)}
   </div>
 </section>
 
-<!-- ============ 04. BP 图解 ============ -->
+
 <section id="bp">
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-no">04</span>
       <h2 class="sec-title">BP 图解</h2>
-      <p class="sec-sub">史上最「凡尔赛」的路演材料：没有商业模式、没有市场分析，就几页——「我们造过什么」「我们带过谁」「我们的影响力」。图片为 Jeff Dean X 推文一手截图（用户提供），点击可放大。</p>
+      <p class="sec-sub">史上最「凡尔赛」的路演材料：没有商业模式、没有市场分析，就几页——「我们造过什么」「我们带过谁」「我们的影响力」。图片为 Jeff Dean X 推文截图（用户提供），点击可放大。</p>
     </div>
     <div class="bp-grid">
       <div class="bp-card">
@@ -438,7 +449,7 @@ footer b{color:var(--ink-dim)}
         </div>
       </div>
       <div class="bp-card">
-        <div class="frame" data-lb="bp_p1_achievements.webp" data-cap="BP 第一页「我们一起造过什么」：四人成就概览（用户 X 推文一手截图）"><span class="zoom-hint">🔍 点击放大</span><img src="bp_p1_achievements.webp" alt="BP 第一页：我们一起造过什么" width="1540" height="864"></div>
+        <div class="frame" data-lb="bp_p1_achievements.webp" data-cap="BP 第一页「我们一起造过什么」：四人成就概览（用户 X 推文截图）"><span class="zoom-hint">🔍 点击放大</span><img src="bp_p1_achievements.webp" alt="BP 第一页：我们一起造过什么" width="1540" height="864"></div>
         <div class="body">
           <div class="num">PAGE 01 · 我们一起造过什么</div>
           <h3>一部 Google 二十年技术编年史</h3>
@@ -446,7 +457,7 @@ footer b{color:var(--ink-dim)}
         </div>
       </div>
       <div class="bp-card">
-        <div class="frame" data-lb="bp_p2_founders.webp" data-cap="BP 第二页「我们带过多大的团队，带出过哪些 AI 创业者」（用户 X 推文一手截图）"><span class="zoom-hint">🔍 点击放大</span><img src="bp_p2_founders.webp" alt="BP 第二页：我们带出过谁" width="1530" height="868"></div>
+        <div class="frame" data-lb="bp_p2_founders.webp" data-cap="BP 第二页「我们带过多大的团队，带出过哪些 AI 创业者」（用户 X 推文截图）"><span class="zoom-hint">🔍 点击放大</span><img src="bp_p2_founders.webp" alt="BP 第二页：我们带出过谁" width="1530" height="868"></div>
         <div class="body">
           <div class="num">PAGE 02 · 我们带出过谁</div>
           <h3>团队管理经验 + 带出的 AI 创业者</h3>
@@ -454,7 +465,7 @@ footer b{color:var(--ink-dim)}
         </div>
       </div>
       <div class="bp-card">
-        <div class="frame" data-lb="bp_p3_scholar.webp" data-cap="BP 第三页「学术影响力」：Google Scholar 高引（用户 X 推文一手截图）"><span class="zoom-hint">🔍 点击放大</span><img src="bp_p3_scholar.webp" alt="BP 第三页：学术影响力（高引学者）" width="1532" height="864"></div>
+        <div class="frame" data-lb="bp_p3_scholar.webp" data-cap="BP 第三页「学术影响力」：Google Scholar 高引（用户 X 推文截图）"><span class="zoom-hint">🔍 点击放大</span><img src="bp_p3_scholar.webp" alt="BP 第三页：学术影响力（高引学者）" width="1532" height="864"></div>
         <div class="body">
           <div class="num">PAGE 03 · 学术影响力</div>
           <h3>这个星球上引用量最高的几个人</h3>
@@ -462,7 +473,7 @@ footer b{color:var(--ink-dim)}
         </div>
       </div>
       <div class="bp-card">
-        <div class="frame" data-lb="bp_p4_life.webp" data-cap="BP 末页：伦敦/巴塔哥尼亚/越南/加州合影（用户 X 推文一手截图）"><span class="zoom-hint">🔍 点击放大</span><img src="bp_p4_life.webp" alt="BP 末页：生活合影" width="1080" height="1739"></div>
+        <div class="frame" data-lb="bp_p4_life.webp" data-cap="BP 末页：伦敦/巴塔哥尼亚/越南/加州合影（用户 X 推文截图）"><span class="zoom-hint">🔍 点击放大</span><img src="bp_p4_life.webp" alt="BP 末页：生活合影" width="1080" height="1739"></div>
         <div class="body">
           <div class="num">PAGE 04 · 最后一页</div>
           <h3>最有松弛感的收尾</h3>
@@ -470,35 +481,37 @@ footer b{color:var(--ink-dim)}
         </div>
       </div>
     </div>
-    <div class="callout co-blue"><b>BP 第二页（我们带出过谁）</b>此前无公开原图，本次由用户 X 推文一手截图补全——名单：Dario Amodei（Anthropic）、Ilya Sutskever、Noam Shazeer（Character.AI）、Physical Intelligence / Thinking Machines / Sakana AI 创始人，与四位华人创业者（见下方「华人创业者」板块）。</div>
+    <details class="fold"><summary>BP 第二页补全说明</summary>
+      <div class="callout co-blue"><b>BP 第二页（我们带出过谁）</b>此前无公开原图，本次由用户 X 推文截图补全——名单：Dario Amodei（Anthropic）、Ilya Sutskever、Noam Shazeer（Character.AI）、Physical Intelligence / Thinking Machines / Sakana AI 创始人，与四位华人创业者（见下方「华人创业者」板块）。</div>
+    </details>
   </div>
 </section>
 
-<!-- ============ 05. 原话与推文 ============ -->
+
 <section id="voices">
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-no">05</span>
       <h2 class="sec-title">创始人原话与推文</h2>
-      <p class="sec-sub">一手信源：Jeff Dean X 推文原文（用户提供高清无版权水印截图）、Wired 独家访谈细节、各方反应。点击图片可放大。</p>
+      <p class="sec-sub">Jeff Dean X 推文原文（用户提供高清无版权水印截图）、Wired 独家访谈细节、各方反应。点击图片可放大。</p>
     </div>
     <div class="tweet-grid">
       <div class="tweet">
         <div class="t-who"><span class="t-avatar">👤</span><b>Jeff Dean</b><span>@JeffDean · 2026-08-06</span></div>
         <div class="t-body">官宣推文：正式宣布成立 Discovery Loop。<b>181.6 万查看</b>，配图 = 品牌标识 + 四人合影。</div>
-        <div class="t-img"><img src="dean_announce.webp" alt="Jeff Dean 官宣推文截图（X 一手）" loading="eager"></div>
-        <div class="t-meta">图源 <span class="views">X 推文一手截图</span> · 用户提供</div>
+        <div class="t-img"><img src="dean_announce.webp" alt="Jeff Dean 官宣推文截图（X）" loading="eager"></div>
+        <div class="t-meta">图源 <span class="views">X 推文截图</span> · 用户提供</div>
       </div>
       <div class="tweet">
         <div class="t-who"><span class="t-avatar">👤</span><b>Jeff Dean</b><span>@JeffDean · 2026-08-06</span></div>
         <div class="t-body">自动化实验循环推文：提出实验 → 实施运行 → 评估 → 反馈回环——「自动化该循环」正是 Discovery Loop 的方法论。</div>
-        <div class="t-img"><img src="dean_loop_tweet.webp" alt="Jeff Dean 自动化实验循环推文（X 一手）" loading="eager"></div>
-        <div class="t-meta">图源 <span class="views">X 推文一手截图</span> · 用户提供</div>
+        <div class="t-img"><img src="dean_loop_tweet.webp" alt="Jeff Dean 自动化实验循环推文（X）" loading="eager"></div>
+        <div class="t-meta">图源 <span class="views">X 推文截图</span> · 用户提供</div>
       </div>
       <div class="tweet">
         <div class="t-who"><span class="t-avatar">👤</span><b>Jeff Dean</b><span>@JeffDean · 2026-08-06</span></div>
         <div class="t-body">“We created a pitch deck to tell a handful of VC firms about us… It was fun putting together the list of people in our teams who have gone on to found a whole range of exciting companies.”</div>
-        <div class="t-img"><img src="dean_funding_tweet.webp" alt="Jeff Dean 融资推文+团队幻灯片（X 一手）" loading="eager"></div>
+        <div class="t-img"><img src="dean_funding_tweet.webp" alt="Jeff Dean 融资推文+团队幻灯片（X）" loading="eager"></div>
         <div class="t-meta">路演 PPT 细节 · 种子轮由 Radical + Khosla 领投，Lightspeed / Kleiner Perkins / Doerr / Alphabet 参投</div>
       </div>
       <div class="tweet">
@@ -526,13 +539,13 @@ footer b{color:var(--ink-dim)}
   </div>
 </section>
 
-<!-- ============ 06. 公司基本盘 ============ -->
+
 <section id="facts">
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-no">06</span>
       <h2 class="sec-title">公司基本盘</h2>
-      <p class="sec-sub">CEO / 董事会 / 治理 / 融资 / 招聘——全部有独立一手信源。</p>
+      <p class="sec-sub">CEO / 董事会 / 治理 / 融资 / 招聘——每一项都有独立来源可查。</p>
     </div>
     <div class="grid g2">
       <div class="card"><h3>创始人团队<span class="en">Four Founders</span></h3>
@@ -563,7 +576,7 @@ footer b{color:var(--ink-dim)}
         <ul>
           <li><b>职位</b> — Member of Technical Staff（唯一在招）</li>
           <li><b>方向</b> — post-training / agents / infrastructure / environments / data / evaluations</li>
-          <li><b>发布时间</b> — 2026-08-04 16:50 UTC（公开前一天，Ashby 一手数据）</li>
+          <li><b>发布时间</b> — 2026-08-04 16:50 UTC（公开前一天，Ashby 数据）</li>
           <li><b>信号</b> — 6 个方向覆盖研究到工程全链路 = 平台级野心</li>
         </ul>
       </div>
@@ -571,7 +584,7 @@ footer b{color:var(--ink-dim)}
   </div>
 </section>
 
-<!-- ============ 07. 时间线 ============ -->
+
 <section id="timeline">
   <div class="wrap">
     <div class="sec-head">
@@ -617,11 +630,13 @@ footer b{color:var(--ink-dim)}
         <div class="src"><b>一手</b> · RDAP 变更记录</div>
       </div>
     </div>
-    <div class="callout co-yellow"><b>矛盾点：</b>Wired 称 idea「几周前成型」，但 .ai 域名 2025-12 已注册（早 8 个月）。筹备期被公开叙事低估 —— 或域名是早期囤积/收购，注册人隐私保护下无法最终确认（Yellow）。</div>
+    <details class="fold"><summary>矛盾点：筹备期被公开叙事低估？（.ai 域名之谜）</summary>
+      <div class="callout co-yellow"><b>矛盾点：</b>Wired 称 idea「几周前成型」，但 .ai 域名 2025-12 已注册（早 8 个月）。筹备期被公开叙事低估 —— 或域名是早期囤积/收购，注册人隐私保护下无法最终确认（Yellow）。</div>
+    </details>
   </div>
 </section>
 
-<!-- ============ 08. 商业模式 ============ -->
+
 <section id="biz">
   <div class="wrap">
     <div class="sec-head">
@@ -637,7 +652,7 @@ footer b{color:var(--ink-dim)}
   </div>
 </section>
 
-<!-- ============ 09. 华人创业者 ============ -->
+
 <section id="chinese">
   <div class="wrap">
     <div class="sec-head">
@@ -651,11 +666,13 @@ footer b{color:var(--ink-dim)}
       <div class="card"><h3>张国栋<span class="en">Guodong Zhang · xAI</span></h3><p>浙大校友，Google Brain/DeepMind 实习经历，<b>xAI 最初创始团队成员</b>。</p></div>
       <div class="card"><h3>任少卿<span class="en">Shaoqing Ren</span></h3><p><b>Faster R-CNN 核心作者</b>，Google Scholar 高引页同框出现；后投身自动驾驶领域。</p></div>
     </div>
-    <div class="callout co-blue"><b>一个信号：</b>BP 专门列出四位华人创业者——Google Brain 时代的中美技术纽带，是这份 BP 里最容易被忽略的全球化注脚。杨植麟「也在上面」，但身份是「带出过的创业者」而非创始人/投资人。</div>
+    <details class="fold"><summary>一个信号：华人创业者名单的全球化注脚</summary>
+      <div class="callout co-blue"><b>一个信号：</b>BP 专门列出四位华人创业者——Google Brain 时代的中美技术纽带，是这份 BP 里最容易被忽略的全球化注脚。杨植麟「也在上面」，但身份是「带出过的创业者」而非创始人/投资人。</div>
+    </details>
   </div>
 </section>
 
-<!-- ============ 10. 九个判断 ============ -->
+
 <section id="analysis">
   <div class="wrap">
     <div class="sec-head">
@@ -666,58 +683,58 @@ footer b{color:var(--ink-dim)}
     <div class="analyst">
       <div class="n">JUDGMENT 01</div>
       <h3>制度性回答：大厂失血的结构信号</h3>
-      <p>Alphabet 自己投资 + 供算力 = 承认体内做不了、但不想失去这些人；PBC 是法律层面的耐心资本承诺。同时 2026 夏 Google 流失的是「建造基础设施本身的人」：Jumper→Anthropic、Shazeer→OpenAI、Dean 四人组→自立——行业权力从大厂向创始人的质变点。<b>反方：</b>大厂依然垄断算力与分发，创始人公司多数依赖大厂供血（本例 Alphabet 就是 founding investor），Google 入股也可能是战略看门人——先观察再决定是否反击。</p>
+      <p>Alphabet 自己投资 + 供算力 = 承认体内做不了、但不想失去这些人；PBC 是法律层面的耐心资本承诺。同时 2026 夏 Google 流失的是「建造基础设施本身的人」：Jumper→Anthropic、Shazeer→OpenAI、Dean 四人组→自立——行业权力从大厂向创始人的质变点。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>大厂依然垄断算力与分发，创始人公司多数依赖大厂供血（本例 Alphabet 就是 founding investor），Google 入股也可能是战略看门人——先观察再决定是否反击。</p></details>
     </div>
     <div class="analyst">
       <div class="n">JUDGMENT 02</div>
       <h3>隐藏杀手锏 = 递归自我改进</h3>
-      <p>明面 AI4S，暗线是「用 AI 造更强的 AI」。递归跑通 = OpenAI 级叙事，这才是 Alphabet 供血的真正原因。<b>反方：</b>递归改进是业界共识目标，Google 内部 Gemini 团队同样在做——差异化在于四人组的系统级经验。</p>
+      <p>明面 AI4S，暗线是「用 AI 造更强的 AI」。递归跑通 = OpenAI 级叙事，这才是 Alphabet 供血的真正原因。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>递归改进是业界共识目标，Google 内部 Gemini 团队同样在做——差异化在于四人组的系统级经验。</p></details>
     </div>
     <div class="analyst">
       <div class="n">JUDGMENT 03</div>
       <h3>前两年实质是 AutoML 加速器</h3>
-      <p>成立两条件恰好排除假说生成难题（Vinyals 承认是弱点）——聚焦可反复试验+可可靠评价的 ML 领域。聪明但保守：最需要突破的理论物理/临床医学不在射程。<b>反方：</b>NAE 大挑战路线图说明他们不打算永远待在 ML 舒适区。</p>
+      <p>成立两条件恰好排除假说生成难题（Vinyals 承认是弱点）——聚焦可反复试验+可可靠评价的 ML 领域。聪明但保守：最需要突破的理论物理/临床医学不在射程。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>NAE 大挑战路线图说明他们不打算永远待在 ML 舒适区。</p></details>
     </div>
     <div class="analyst">
       <div class="n">JUDGMENT 04</div>
       <h3>AutoML 的第二次机会，还是第二次泡沫？</h3>
-      <p>AutoML/NAS 2017 年吹过一轮（Google 自己就是旗手：NASNet/Evolved Transformer），后来在真实科研中渗透有限——自动化模型搜索没有颠覆研究范式。<b>质疑：</b>Discovery Loop 是换个名字重来，还是真的找到了突破口（这次赌的是「自动化整个实验循环」而非只搜模型架构）？<b>反方：</b>这次有 4 个建过 Google 基础设施的人 + 算力全包 + 明确路线图，与前一次不可同日而语；且「循环」框架天然覆盖超参/数据/评估全栈，不止架构搜索。</p>
+      <p>AutoML/NAS 2017 年吹过一轮（Google 自己就是旗手：NASNet/Evolved Transformer），后来在真实科研中渗透有限——自动化模型搜索没有颠覆研究范式。<b>质疑：</b>Discovery Loop 是换个名字重来，还是真的找到了突破口（这次赌的是「自动化整个实验循环」而非只搜模型架构）？<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>这次有 4 个建过 Google 基础设施的人 + 算力全包 + 明确路线图，与前一次不可同日而语；且「循环」框架天然覆盖超参/数据/评估全栈，不止架构搜索。</p></details>
     </div>
     <div class="analyst">
       <div class="n">JUDGMENT 05</div>
       <h3>Khosla 押的不是技术，是 Jeff Dean 本人</h3>
-      <p>“AI is the researcher” 是漂亮的营销叙事，但真正的护城河是创始人名望带来的资本引力——「VC 排队送钱还被挑着收」，这在估值和后续融资上是自我强化的飞轮。<b>反方：</b>Khosla 2018 押 OpenAI 赌的是赛道不是人（当时 Ilya 尚无今日名望）；这次人和赛道兼备，叙事只是结果不是原因。</p>
+      <p>“AI is the researcher” 是漂亮的营销叙事，但真正的护城河是创始人名望带来的资本引力——「VC 排队送钱还被挑着收」，这在估值和后续融资上是自我强化的飞轮。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>Khosla 2018 押 OpenAI 赌的是赛道不是人（当时 Ilya 尚无今日名望）；这次人和赛道兼备，叙事只是结果不是原因。</p></details>
     </div>
     <div class="analyst">
       <div class="n">JUDGMENT 06</div>
       <h3>谁受损？风险的真实落点</h3>
-      <p>如果「AI 自动化实验循环」真跑通：①<b>学术界</b>——不可复现危机放大、论文工厂获得加速器；②<b>传统 AutoML 创业公司</b>——被降维打击；③<b>科研资助体系</b>——「实验快」重估「洞察贵」。<b>反方：</b>这些风险都在 5-10 年尺度，且多数是「好问题的坏副作用」，不改变核心判断。</p>
+      <p>如果「AI 自动化实验循环」真跑通：①<b>学术界</b>——不可复现危机放大、论文工厂获得加速器；②<b>传统 AutoML 创业公司</b>——被降维打击；③<b>科研资助体系</b>——「实验快」重估「洞察贵」。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>这些风险都在 5-10 年尺度，且多数是「好问题的坏副作用」，不改变核心判断。</p></details>
     </div>
     <div class="analyst">
       <div class="n">JUDGMENT 07</div>
       <h3>「8/4 系统性筹备」修正了「几周仓促」叙事</h3>
-      <p>招聘 8/4 发布 + 域名 8/4 激活 + 官网证书 7/21 + .ai 域名 2025-12 注册——上线动作是系统性的，不是几周即兴。<b>反方：</b>8/4 只能证明「上线准备日」，不能证明「筹备期长度」——.ai 域名之谜未解，仍标 Yellow。</p>
+      <p>招聘 8/4 发布 + 域名 8/4 激活 + 官网证书 7/21 + .ai 域名 2025-12 注册——上线动作是系统性的，不是几周即兴。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>8/4 只能证明「上线准备日」，不能证明「筹备期长度」——.ai 域名之谜未解，仍标 Yellow。</p></details>
     </div>
     <div class="analyst">
       <div class="n">JUDGMENT 08</div>
       <h3>外部预测：第一个 loop 产出要等一年（FutureSearch）</h3>
-      <p>FutureSearch（非一手，8/6 独立分析）中位数预测：首个 ML 产出 <b>2027-08</b>、20 员工 <b>2027-06</b>、ML 外首个成果 <b>2030-08</b>、首个商业化 <b>2029-01</b>；芯片设计突破概率 <b>38%</b>（2028 前，AlphaChip 前身）、材料 28%、临床最低 12-19%。<b>反方：</b>预测基于公开信息外推，对「递归自我改进」这类非线性变量估计能力有限——只能当标尺，不是事实。</p>
+      <p>FutureSearch（非一手，8/6 独立分析）中位数预测：首个 ML 产出 <b>2027-08</b>、20 员工 <b>2027-06</b>、ML 外首个成果 <b>2030-08</b>、首个商业化 <b>2029-01</b>；芯片设计突破概率 <b>38%</b>（2028 前，AlphaChip 前身）、材料 28%、临床最低 12-19%。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>预测基于公开信息外推，对「递归自我改进」这类非线性变量估计能力有限——只能当标尺，不是事实。</p></details>
     </div>
     <div class="analyst">
       <div class="n">JUDGMENT 09</div>
       <h3>访谈透露的团队文化：拒绝惯性，拥抱自由</h3>
-      <p>Wired 细节：Pichai <b>多轮会议挽留</b>（keep their badges）、Khosla <b>周六 Sand Hill Road 密会保密</b>、其余会面在 Dean 家、pitch deck <b>没用 AI 做</b>（“a few slides with our backgrounds and a rough sketch”）、四人“同事兼度假好友”。这些细节拼出：极度自信（不需要精美 PPT）+ 极度低调（保密到周六）+ 极度互信（度假好友共事）。<b>反方：</b>「没用 AI 做 PPT」可能只是时间仓促而非原则立场——但结合四人 AI 地位，更可能是对工具价值的清醒判断。</p>
+      <p>Wired 细节：Pichai <b>多轮会议挽留</b>（keep their badges）、Khosla <b>周六 Sand Hill Road 密会保密</b>、其余会面在 Dean 家、pitch deck <b>没用 AI 做</b>（“a few slides with our backgrounds and a rough sketch”）、四人“同事兼度假好友”。这些细节拼出：极度自信（不需要精美 PPT）+ 极度低调（保密到周六）+ 极度互信（度假好友共事）。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>「没用 AI 做 PPT」可能只是时间仓促而非原则立场——但结合四人 AI 地位，更可能是对工具价值的清醒判断。</p></details>
     </div>
   </div>
 </section>
 
-<!-- ============ 11. 观察清单 ============ -->
+
 <section id="watch">
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-no">11</span>
       <h2 class="sec-title">观察清单：接下来看什么</h2>
-      <p class="sec-sub">把页面从「静态档案」变成「活的追踪」——以下三个信号出现时，结论需要更新。</p>
+      <p class="sec-sub">以下三个信号出现时，结论需要更新。</p>
     </div>
     <div class="watch-item">
       <div class="w-icon">💰</div>
@@ -746,20 +763,22 @@ footer b{color:var(--ink-dim)}
   </div>
 </section>
 
-<!-- ============ 12. 信源声明 ============ -->
+
 <section id="sources">
   <div class="wrap">
     <div class="sec-head">
       <span class="sec-no">12</span>
       <h2 class="sec-title">信源声明</h2>
-      <p class="sec-sub">一手信源铁律：所有事实均来自实际抓取，不凭预训练知识。分级标注如下。</p>
+      <p class="sec-sub">所有事实均来自实际抓取，不凭预训练知识。信源分级标注如下。</p>
     </div>
-    <div class="table-wrap">
+    <details class="fold">
+      <summary>查看完整信源声明（15 项）</summary>
+      <div class="table-wrap">
       <table>
         <thead><tr><th>层级</th><th>材料</th><th>状态</th></tr></thead>
         <tbody>
           <tr><td><span class="ok">一手</span></td><td><b>官网全文</b> discoveryloop.com（真正的官网，非 .ai）</td><td>8/8 直取 HTTP 200</td></tr>
-          <tr><td><span class="ok">一手</span></td><td><b>BP 图解图片</b>（封面/第一至四页，含此前缺页的第二页）</td><td>用户 X 推文一手截图 2026-08-08</td></tr>
+          <tr><td><span class="ok">一手</span></td><td><b>BP 图解图片</b>（封面/第一至四页，含此前缺页的第二页）</td><td>用户 X 推文截图 2026-08-08</td></tr>
           <tr><td><span class="ok">一手</span></td><td><b>Wired 独家采访</b>（Steven Levy，launch 前四人全员受访）</td><td>全文</td></tr>
           <tr><td><span class="ok">一手</span></td><td><b>Google 官方博客</b> Pichai 声明原文</td><td>全文</td></tr>
           <tr><td><span class="ok">一手</span></td><td><b>Ashby 招聘 API</b>（职位/地点/发布时间）</td><td>API 直取</td></tr>
@@ -775,13 +794,14 @@ footer b{color:var(--ink-dim)}
           <tr><td><span class="bad">未解</span></td><td>.ai 域名 2025-12 注册之谜 / Axios 原文直取（VPC 阻断）</td><td>已如实标注</td></tr>
         </tbody>
       </table>
-    </div>
+      </div>
+    </details>
     <div class="callout co-red"><b>反方自检：</b>①BP 图片是媒体截图非原始 PDF（Yellow）②Axios 金额未官方确认（Yellow）③. ai 注册之谜未解（Yellow）。核心承重柱（官网全文 + Wired + Google 官方 + BP 图片）四方独立印证，风险可控。</div>
   </div>
 </section>
 
 <footer>
-  <div class="row"><b>Discovery Loop</b> · 一手信源专题</div>
+  <div class="row"><b>Discovery Loop</b> · 深度解读专题</div>
   <div class="row">信源：discoveryloop.com · Wired · Google Blog · TechCrunch · 量子位 · Ashby · RDAP · CertSpotter</div>
   <div class="row">存档：archive/discovery-loop/ · 2026-08-08</div>
 </footer>
