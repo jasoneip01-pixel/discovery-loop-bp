@@ -190,6 +190,13 @@ td .ok{color:var(--green)}td .warn{color:var(--yellow)}td .bad{color:var(--red)}
 .letter-quote .lq{font-size:14.5px;color:var(--ink-dim);line-height:1.8}
 .letter-quote .lq b{color:var(--gold-bright)}
 .letter-quote .lq-src{margin-top:8px;font-size:12px;color:var(--ink-faint)}
+/* ===== THESIS HERO ===== */
+.thesis-hero{margin:22px 0 6px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;overflow:hidden}
+.thesis-hero .frame{width:100%;max-width:860px;margin:0 auto;border-radius:var(--radius-sm);overflow:hidden;cursor:zoom-in;position:relative}
+.thesis-hero .frame img{width:100%;height:auto;display:block}
+.thesis-hero .th-cap{margin-top:14px;font-size:13px;color:var(--ink-dim);line-height:1.7;text-align:center}
+.thesis-hero .th-cap b{color:var(--gold-bright)}
+.thesis-hero .th-cap .th-approach{color:var(--ink-faint);font-size:12.5px}
 /* ===== FOLD ===== */
 details.fold{background:var(--card2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:0;margin:18px 0}
 details.fold summary{cursor:pointer;padding:14px 18px;font-size:13.5px;font-weight:600;color:var(--gold-bright);list-style:none;display:flex;align-items:center;gap:8px}
@@ -346,6 +353,10 @@ footer b{color:var(--ink-dim)}
       <h2 class="sec-title">核心命题：自动化实验循环</h2>
       <p class="sec-sub">这是整份 BP 的灵魂——不是造更好的锤子，是造一台能自动造锤子的机器。</p>
     </div>
+    <div class="thesis-hero">
+      <div class="frame" data-lb="loop_diagram.webp" data-cap="Common Cycle in many Disciplines — 科学与工程通用循环图（Jeff Dean X 推文截图）"><span class="zoom-hint">🔍 点击放大</span><img src="loop_diagram.webp" alt="Common Cycle in many Disciplines 通用循环图" width="1150" height="642"></div>
+      <div class="th-cap"><b>Common Cycle in many Disciplines</b> · The universal loop of science and engineering — Propose Experiment → Implement and Run → Evaluate →（闭环）<br><span class="th-approach">Our approach: Automate the loop! — 缩短迭代时间 · 自动提议并批量运行实验 · 从每次评估中学习 · 提升实验质量与规模 → 突破性成果</span></div>
+    </div>
     <div class="grid g3">
       <div class="card"><h3>做什么<span class="en">What</span></h3><p>自动化「提出假设 → 设计实验 → 执行 → 评估 → 迭代」的完整实验循环，<b>并行跑成千上万个实验</b>，把科学发现从人肉慢循环变成 AI 快循环。</p></div>
       <div class="card"><h3>为什么是现在<span class="en">Why</span></h3><p>Khosla 领投人原话：<b>“AI is the researcher.”</b>——AI 不再是研究工具，而是研究者本身。四人过去 20 年建造了 Google 的 AI 基础设施，现在要造那台能自动造锤子的机器。</p></div>
@@ -365,14 +376,6 @@ footer b{color:var(--ink-dim)}
       </div>
     </div>
     <div class="grid g2" style="margin-top:18px">
-      <div class="bp-card">
-        <div class="frame" data-lb="loop_diagram.webp" data-cap="自动化实验循环流程图（Jeff Dean X 推文截图）"><span class="zoom-hint">🔍 点击放大</span><img src="loop_diagram.webp" alt="自动化实验循环流程图" width="1150" height="642"></div>
-        <div class="body">
-          <div class="num">原图</div>
-          <h3>多学科通用循环</h3>
-          <p>提出实验 → 实施运行 → 评估 → 反馈回环——「自动化该循环」正是 Discovery Loop 的方法论。图源 Jeff Dean X 推文。</p>
-        </div>
-      </div>
       <div class="bp-card">
         <div class="frame" data-lb="nae_challenges.webp" data-cap="14 项 NAE Grand Challenges（Jeff Dean X 推文截图）"><span class="zoom-hint">🔍 点击放大</span><img src="nae_challenges.webp" alt="NAE 14 项大挑战" width="1146" height="646"></div>
         <div class="body">
