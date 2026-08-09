@@ -72,6 +72,7 @@ section{padding:72px 0;border-top:1px solid var(--line);scroll-margin-top:calc(v
 .g3{grid-template-columns:repeat(3,1fr)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:border-color .25s,transform .25s}
 .card:hover{border-color:var(--line2);transform:translateY(-2px)}
+.card-featured{border-color:rgba(212,169,78,.35);background:linear-gradient(180deg,rgba(212,169,78,.06),var(--card));grid-column:1/-1}
 .card h3{font-size:17px;font-weight:700;color:var(--gold-bright);margin-bottom:10px}
 .card h3 .en{display:block;font-size:12px;color:var(--ink-faint);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
 .card p{font-size:14.5px;color:var(--ink-dim)}
@@ -734,10 +735,12 @@ footer b{color:var(--ink-dim)}
       <p class="sec-sub">Dario Amodei（Anthropic）、Ilya Sutskever、Noam Shazeer（Character.AI）撑起 AI 创业圈半壁江山，但名单上还有四位华人创业者。</p>
     </div>
     <div class="grid g2">
-      <div class="card"><h3>杨植麟<span class="en">Yang Zhilin · 月之暗面</span></h3><p>CMU 读博期间进入 Google Brain 与 Quoc Le 合作，共著 <b>Transformer-XL + XLNet</b>（突破固定文本窗口）；创办月之暗面做出 <b>Kimi</b>，长文本能力是最早出圈的标签。</p></div>
-      <div class="card"><h3>戴子航<span class="en">Zihang Dai · xAI</span></h3><p>杨植麟老搭档，Transformer-XL/XLNet 共同一作，斯坦福 LTI 博士，后加入 <b>xAI 创始团队</b>。</p></div>
-      <div class="card"><h3>张国栋<span class="en">Guodong Zhang · xAI</span></h3><p>浙大校友，Google Brain/DeepMind 实习经历，<b>xAI 最初创始团队成员</b>。</p></div>
-      <div class="card"><h3>任少卿<span class="en">Shaoqing Ren</span></h3><p><b>Faster R-CNN 核心作者</b>，Google Scholar 高引页同框出现；后投身自动驾驶领域。</p></div>
+      <div class="card card-featured"><h3>杨植麟<span class="en">Yang Zhilin · 月之暗面</span></h3><p>CMU 读博期间进入 Google Brain 与 Quoc Le 合作，共著 <b>Transformer-XL + XLNet</b>（突破固定文本窗口）；创办月之暗面做出 <b>Kimi</b>，长文本能力是最早出圈的标签。<b>BP 里四位华人创业者的头牌</b>——带出过的人里，他是唯一独立做出百亿级公司的。</p></div>
+      <div class="grid g3">
+        <div class="card"><h3>戴子航<span class="en">Zihang Dai · xAI</span></h3><p>杨植麟老搭档，Transformer-XL/XLNet 共同一作，斯坦福 LTI 博士，后加入 <b>xAI 创始团队</b>。</p></div>
+        <div class="card"><h3>张国栋<span class="en">Guodong Zhang · xAI</span></h3><p>浙大校友，Google Brain/DeepMind 实习经历，<b>xAI 最初创始团队成员</b>。</p></div>
+        <div class="card"><h3>任少卿<span class="en">Shaoqing Ren</span></h3><p><b>Faster R-CNN 核心作者</b>，Google Scholar 高引页同框出现；后投身自动驾驶领域。</p></div>
+      </div>
     </div>
     <details class="fold"><summary>一个信号：华人创业者名单的全球化注脚</summary>
       <div class="callout co-blue"><b>一个信号：</b>BP 专门列出四位华人创业者。Google Brain 时代的中美技术纽带，是这份 BP 里最容易被忽略的全球化注脚。杨植麟「也在上面」，但身份是「带出过的创业者」而非创始人/投资人。</div>
