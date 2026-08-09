@@ -2,13 +2,16 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Discovery Loop：Jeff Dean 新公司深度解读</title>
-<meta name="description" content="Jeff Dean 新公司 Discovery Loop 深度解读：告别信原文、BP 图解、融资结构、时间线、华人创业者与九个判断。">
-<meta property="og:title" content="Discovery Loop：Jeff Dean 新公司深度解读">
-<meta property="og:description" content="自动化实验循环：AI 研究 AI 的正循环起点。告别信原文 + BP 图解 + 九个判断。">
-<meta property="og:type" content="article">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discovery Loop · 深度解读 · 自动化发现</title>
+<meta name="description" content="Jeff Dean 四人组新公司 BP 深读：人物 → 命题 → 证据 → 机制 → 变量 → 判断。一手信源四方交叉。">
 <style>
+/* ═══════════════════════════════════════════
+   Discovery Loop 深读 v3 · Tim Cook 叙事骨架版
+   6 章滚动叙事：人物→命题→证据→机制→变量→判断
+   大数字卡 + 引语卡 + 时间线带 + 反方自检
+   语义色保留：金=硅谷理性 / 青=自动化 / 红=华尔街杠杆
+   ═══════════════════════════════════════════ */
 :root{
   --bg:#0a0e14; --bg2:#0f1520; --bg3:#141c2b;
   --ink:#dbe4f0; --ink-dim:#8b98ab; --ink-faint:#5a6577;
@@ -19,956 +22,772 @@
   --radius:14px; --radius-sm:8px;
   --font:'PingFang SC','Hiragino Sans GB','Microsoft YaHei',system-ui,-apple-system,sans-serif;
   --mono:'SF Mono','JetBrains Mono','Consolas',monospace;
-  --nav-h:56px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.7;overflow-x:hidden}
-::selection{background:rgba(212,169,78,.3)}
-a{color:var(--teal);text-decoration:none;border-bottom:1px dotted rgba(61,214,200,.4)}
-a:hover{color:var(--gold-bright);border-bottom-color:var(--gold)}
-.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
-/* ===== PROGRESS BAR ===== */
-.progress-bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold-dim),var(--gold-bright));z-index:1000;transition:width .1s linear}
-/* ===== NAV ===== */
-nav{position:sticky;top:0;z-index:900;background:rgba(10,14,20,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);height:var(--nav-h)}
-.nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.nav-brand{font-weight:800;font-size:15px;color:var(--gold-bright);letter-spacing:.03em;white-space:nowrap}
-.nav-brand span{color:var(--ink-faint);font-weight:500;font-size:12px;margin-left:6px}
-.nav-links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
-.nav-links::-webkit-scrollbar{display:none}
-.nav-links a{color:var(--ink-dim);font-size:13px;padding:6px 10px;border-radius:6px;border-bottom:none;white-space:nowrap;transition:color .2s,background .2s}
-.nav-links a:hover{color:var(--ink);background:rgba(212,169,78,.08)}
-.nav-links a.active{color:var(--gold-bright);background:rgba(212,169,78,.12)}
-.nav-burger{display:none;background:none;border:1px solid var(--line2);color:var(--ink);border-radius:8px;padding:6px 10px;font-size:16px;cursor:pointer}
-/* ===== HERO ===== */
-.hero{position:relative;min-height:88vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:100px 20px 70px;overflow:hidden;background:
-  radial-gradient(ellipse 80% 60% at 50% -10%, rgba(212,169,78,.10), transparent 60%),
-  radial-gradient(ellipse 60% 50% at 85% 110%, rgba(61,214,200,.07), transparent 60%),
-  var(--bg)}
-.hero::before{content:"";position:absolute;inset:0;background-image:
-  radial-gradient(rgba(212,169,78,.06) 1px, transparent 1px);background-size:28px 28px;mask-image:radial-gradient(ellipse 70% 60% at 50% 40%, black, transparent)}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border:1px solid var(--line2);border-radius:999px;background:rgba(20,28,43,.7);color:var(--ink-dim);font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:28px}
-.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);animation:pulse 2.4s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.hero h1{font-size:clamp(40px,8vw,84px);font-weight:800;letter-spacing:.02em;line-height:1.1;color:var(--gold-bright)}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:var(--font); line-height:1.7;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+/* ── 进度条 ── */
+#progressBar{
+  position:fixed;top:0;left:0;height:3px;width:0;
+  background:linear-gradient(90deg,var(--gold),var(--teal));
+  z-index:100;transition:width .1s linear;
+}
+/* ── 顶部导航 ── */
+nav{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:rgba(10,14,20,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);z-index:90;
+  display:flex;align-items:center;padding:0 24px;gap:16px;
+}
+nav .logo{font-weight:700;letter-spacing:.02em;font-size:14px;color:var(--ink)}
+nav .logo b{color:var(--gold)}
+nav .nav-links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+nav .nav-links::-webkit-scrollbar{display:none}
+nav .nav-links a{
+  color:var(--ink-dim);text-decoration:none;font-size:12.5px;
+  padding:6px 10px;border-radius:6px;white-space:nowrap;transition:all .25s;
+}
+nav .nav-links a:hover{color:var(--ink);background:var(--card)}
+nav .nav-links a.on{color:var(--gold-bright);background:rgba(212,169,78,.12)}
 
-.hero .tagline{max-width:640px;margin:36px auto 0;font-size:clamp(16px,2.6vw,21px);color:var(--ink);font-weight:500}
-.hero .tagline em{font-style:normal;color:var(--gold-bright)}
-.hero .meta{margin-top:44px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.pill{padding:8px 18px;border:1px solid var(--line2);border-radius:999px;background:rgba(20,28,43,.6);font-size:13.5px;color:var(--ink-dim)}
-.pill b{color:var(--ink);font-weight:600}
+/* ── Hero（Tim Cook 式：一句话 + 滚动提示）── */
+.hero{
+  min-height:92vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:120px 24px 60px;position:relative;
+}
+.hero .kicker{
+  font-size:12px;letter-spacing:.35em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:22px;
+}
+.hero h1{
+  font-size:clamp(38px,7vw,72px);line-height:1.15;
+  font-weight:800;letter-spacing:-.02em;
+  max-width:900px;
+}
+.hero h1 .grad{color:var(--gold-bright)}
+.hero h1 .grad2{color:var(--teal)}
+.hero .sub{
+  margin-top:26px;font-size:clamp(15px,2vw,19px);
+  color:var(--ink-dim);max-width:640px;line-height:1.8;
+}
+.hero .meta{
+  margin-top:34px;font-size:12.5px;color:var(--ink-faint);
+  letter-spacing:.08em;
+}
+.hero .scroll-hint{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  color:var(--ink-faint);font-size:12px;letter-spacing:.25em;
+  animation:bob 2.2s ease-in-out infinite;
+}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
 
+/* ── 章节 ── */
+.chapter{
+  max-width:1080px;margin:0 auto;padding:100px 24px;
+  position:relative;
 }
-/* ===== SECTION SHELL ===== */
-section{padding:72px 0;border-top:1px solid var(--line);scroll-margin-top:calc(var(--nav-h) + 8px)}
-.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:36px;flex-wrap:wrap}
-.sec-no{font-family:var(--mono);color:var(--gold);font-size:14px;letter-spacing:.15em}
-.sec-title{font-size:clamp(24px,4vw,34px);font-weight:800;letter-spacing:.01em}
-.sec-sub{color:var(--ink-dim);font-size:15px;flex-basis:100%;max-width:720px}
-/* ===== CARDS / GRID ===== */
-.grid{display:grid;gap:18px}
-.g2{grid-template-columns:repeat(2,1fr)}
-.g3{grid-template-columns:repeat(3,1fr)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;transition:border-color .25s,transform .25s}
-.card:hover{border-color:var(--line2);transform:translateY(-2px)}
-.card-featured{border-color:rgba(212,169,78,.35);background:linear-gradient(180deg,rgba(212,169,78,.06),var(--card));grid-column:1/-1}
-.card h3{font-size:17px;font-weight:700;color:var(--gold-bright);margin-bottom:10px}
-.card h3 .en{display:block;font-size:12px;color:var(--ink-faint);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
-.card p{font-size:14.5px;color:var(--ink-dim)}
-.card p b{color:var(--ink)}
-.card ul{list-style:none;margin-top:10px}
-.card li{font-size:14px;color:var(--ink-dim);padding:5px 0 5px 20px;position:relative}
-.card li::before{content:"▸";position:absolute;left:0;color:var(--gold)}
-/* ===== BP DECK ===== */
-.bp-grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-.bp-card{background:var(--card2);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .3s,border-color .3s}
-.bp-card:hover{transform:translateY(-4px);border-color:var(--gold-dim)}
-.bp-card .frame{background:linear-gradient(180deg,#0c1119,#0a0e14);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;min-height:200px;padding:16px;cursor:zoom-in}
-.bp-card .frame img{max-width:100%;height:auto;border-radius:6px;box-shadow:0 8px 30px rgba(0,0,0,.5);transition:transform .3s}
-.bp-card .frame:hover img{transform:scale(1.02)}
-.bp-card .frame .zoom-hint{position:absolute;bottom:8px;right:10px;background:rgba(10,14,20,.8);color:var(--gold-bright);font-size:11px;padding:3px 8px;border-radius:4px;opacity:0;transition:opacity .25s;pointer-events:none}
-.bp-card .frame:hover .zoom-hint{opacity:1}
-.bp-card .body{padding:18px 20px 22px}
-.bp-card .num{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.2em}
-.bp-card h3{font-size:16.5px;margin:6px 0 8px;color:var(--ink)}
-.bp-card p{font-size:13.8px;color:var(--ink-dim)}
-/* ===== LIGHTBOX ===== */
-.lightbox{position:fixed;inset:0;z-index:1200;background:rgba(5,8,12,.94);display:none;align-items:center;justify-content:center;flex-direction:column;padding:24px;cursor:zoom-out}
-.lightbox.open{display:flex}
-.lightbox img{max-width:92vw;max-height:82vh;border-radius:8px;box-shadow:0 20px 80px rgba(0,0,0,.7)}
-.lightbox .lb-cap{color:var(--ink-dim);font-size:13.5px;margin-top:14px;text-align:center;max-width:640px}
-.lightbox .lb-close{position:absolute;top:18px;right:24px;color:var(--ink-dim);font-size:30px;cursor:pointer;line-height:1}
-.lightbox .lb-close:hover{color:var(--gold-bright)}
-/* ===== TIMELINE ===== */
-.timeline{position:relative;padding-left:34px;max-width:760px;margin:0 auto}
-.timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--gold-dim),var(--line2))}
-.tl-item{position:relative;padding:0 0 34px 22px}
-.tl-item:last-child{padding-bottom:0}
-.tl-item::before{content:"";position:absolute;left:-29px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2.5px solid var(--gold);box-shadow:0 0 12px rgba(212,169,78,.4)}
-.tl-item .date{font-family:var(--mono);font-size:13px;color:var(--gold-bright);letter-spacing:.05em}
-.tl-item h3{font-size:16px;margin:4px 0 6px;color:var(--ink)}
-.tl-item p{font-size:14px;color:var(--ink-dim)}
-.tl-item .src{font-size:12px;color:var(--ink-faint);margin-top:6px}
-.tl-item .src b{color:var(--teal);font-weight:600}
-/* ===== QUOTE ===== */
-.quote-block{border-left:3px solid var(--gold);background:var(--card);padding:26px 28px;border-radius:0 var(--radius) var(--radius) 0;margin:26px 0}
-.quote-block .q{font-size:clamp(16px,2.8vw,20px);color:var(--ink);font-weight:600;line-height:1.6}
-.quote-block .q::before{content:"“";color:var(--gold);font-size:1.3em}
-.quote-block .q::after{content:"”";color:var(--gold);font-size:1.3em}
-.quote-block .who{margin-top:12px;font-size:13.5px;color:var(--ink-dim)}
-.quote-block .who b{color:var(--gold-bright)}
-/* ===== CALL-OUT BOXES ===== */
-.callout{border-radius:var(--radius);padding:18px 22px;margin:14px 0;font-size:14px;border:1px solid}
-.callout b{font-weight:700}
-.co-green{background:rgba(92,184,122,.07);border-color:rgba(92,184,122,.25);color:#a8d5b6}
-.co-yellow{background:rgba(224,184,78,.07);border-color:rgba(224,184,78,.3);color:#e6cd8a}
-.co-red{background:rgba(224,92,92,.07);border-color:rgba(224,92,92,.3);color:#e8a0a0}
-.co-blue{background:rgba(61,214,200,.06);border-color:rgba(61,214,200,.25);color:#9adfd8}
-/* ===== TABLE ===== */
-.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:var(--radius);margin:18px 0}
-table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
-th{background:var(--bg3);color:var(--gold-bright);text-align:left;padding:13px 16px;font-weight:600;white-space:nowrap;border-bottom:1px solid var(--line2)}
-td{padding:12px 16px;border-bottom:1px solid var(--line);color:var(--ink-dim);vertical-align:top}
-tr:last-child td{border-bottom:none}
-td b{color:var(--ink)}
-td .ok{color:var(--green)}td .warn{color:var(--yellow)}td .bad{color:var(--red)}
-/* ===== ANALYSTS ===== */
-.analyst{border-left:3px solid var(--line2);padding:18px 22px;margin:16px 0;background:var(--card);border-radius:0 var(--radius-sm) var(--radius-sm) 0}
-.analyst .n{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.15em}
-.analyst h3{font-size:16px;color:var(--ink);margin:4px 0 8px}
-.analyst p{font-size:14.2px;color:var(--ink-dim)}
-.analyst p b{color:var(--gold-bright)}
-/* ===== FOUNDERS ===== */
-.founders-list{display:flex;flex-direction:column;gap:14px}
-.founder-row{display:flex;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;transition:border-color .25s}
-.founder-row:hover{border-color:var(--line2)}
-.fr-idx{font-family:var(--mono);font-size:15px;color:var(--gold);flex-shrink:0;padding-top:2px}
-.fr-body{flex:1}
-.fr-name{font-size:17px;font-weight:700;color:var(--ink)}
-.fr-name .fr-role{font-size:12.5px;color:var(--gold-bright);font-weight:600;letter-spacing:.05em;margin-left:8px}
-.fr-desc{font-size:14px;color:var(--ink-dim);margin-top:6px;line-height:1.7}
-.fr-desc b{color:var(--ink)}
-.founder-row .f-sig{font-size:12.5px;color:var(--teal);margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
-.founder-group-shot{margin-top:8px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--card2)}
-.founder-group-shot .gs-frame{cursor:zoom-in;position:relative;background:linear-gradient(180deg,#0c1119,#0a0e14)}
-.founder-group-shot .gs-frame img{width:100%;height:auto;display:block}
-.founder-group-shot .gs-frame .zoom-hint{position:absolute;bottom:10px;right:12px;background:rgba(10,14,20,.8);color:var(--gold-bright);font-size:11px;padding:3px 8px;border-radius:4px}
-.founder-group-shot .gs-cap{padding:10px 16px;font-size:12.5px;color:var(--ink-faint)}
-@media (max-width:640px){
-  .founder-row{flex-direction:column;gap:8px;padding:16px 18px}
+.chapter-head{
+  margin-bottom:52px;
 }
-/* ===== TWEETS ===== */
-.tweet-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-.tweet{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;position:relative}
-.tweet::before{content:"“";position:absolute;top:8px;left:16px;font-size:44px;color:var(--gold-dim);font-family:Georgia,serif;opacity:.5}
-.tweet .t-who{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.tweet .t-who .t-avatar{width:30px;height:30px;border-radius:50%;background:var(--bg3);border:1px solid var(--line2);display:flex;align-items:center;justify-content:center;font-size:14px}
-.tweet .t-who b{font-size:14px;color:var(--ink)}
-.tweet .t-who span{font-size:12px;color:var(--ink-faint)}
-.tweet .t-body{font-size:14px;color:var(--ink-dim);line-height:1.7}
-.tweet .t-body b{color:var(--ink)}
-.tweet .t-meta{margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-faint)}
-.tweet .t-meta .views{color:var(--gold-bright)}
-.tweet .t-img{margin-top:12px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
-.tweet .t-img img{width:100%;height:auto;display:block}
-/* ===== QUOTE PULL ===== */
-.pull-row{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:26px}
-.pull{border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:18px 20px;background:var(--card2)}
-.pull .p-q{font-size:14.5px;color:var(--ink);font-weight:600;line-height:1.65}
-.pull .p-q::before{content:"“";color:var(--gold)}
-.pull .p-q::after{content:"”";color:var(--gold)}
-.pull .p-who{margin-top:8px;font-size:12.5px;color:var(--ink-faint)}
-.pull .p-who b{color:var(--teal)}
-/* ===== LETTER ===== */
-.letter-grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-.letter-item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
-.letter-item .l-img{cursor:zoom-in;position:relative;background:#0c1119}
-.letter-item .l-img img{width:100%;height:auto;display:block}
-.letter-item .l-img .zoom-hint{position:absolute;bottom:10px;right:12px;background:rgba(10,14,20,.8);color:var(--gold-bright);font-size:11px;padding:3px 8px;border-radius:4px}
-.letter-item .l-cap{padding:12px 16px;font-size:12.5px;color:var(--ink-faint)}
-.letter-quote{border-left:3px solid var(--gold);background:var(--card2);padding:20px 24px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;margin:16px 0}
-.letter-quote .lq{font-size:14.5px;color:var(--ink-dim);line-height:1.8}
-.letter-quote .lq b{color:var(--gold-bright)}
-.letter-quote .lq-src{margin-top:8px;font-size:12px;color:var(--ink-faint)}
-/* ===== THESIS HERO ===== */
-.thesis-hero{margin:22px 0 6px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;overflow:hidden}
-.thesis-hero .frame{width:100%;max-width:860px;margin:0 auto;border-radius:var(--radius-sm);overflow:hidden;cursor:zoom-in;position:relative}
-.thesis-hero .frame img{width:100%;height:auto;display:block}
-.thesis-hero .th-cap{margin-top:14px;font-size:13px;color:var(--ink-dim);line-height:1.7;text-align:center}
-.thesis-hero .th-cap b{color:var(--gold-bright)}
-.thesis-hero .th-cap .th-approach{color:var(--ink-faint);font-size:12.5px}
-/* ===== FOLD ===== */
-details.fold{background:var(--card2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:0;margin:18px 0}
-details.fold summary{cursor:pointer;padding:14px 18px;font-size:13.5px;font-weight:600;color:var(--gold-bright);list-style:none;display:flex;align-items:center;gap:8px}
-details.fold summary::-webkit-details-marker{display:none}
-details.fold summary::before{content:"▸";transition:transform .2s;color:var(--gold)}
-details.fold[open] summary::before{transform:rotate(90deg)}
-details.fold .table-wrap{margin:0 18px 18px}
-details.fold .callout{margin:0 18px 18px;border-radius:var(--radius-sm)}
-details.fold-inline{margin-top:10px;font-size:13px}
-details.fold-inline summary{cursor:pointer;color:var(--gold-bright);font-size:12.5px;opacity:.85;display:inline-block;padding:4px 0}
-details.fold-inline summary:hover{opacity:1}
-/* ===== WATCHLIST ===== */
-.watch-item{display:flex;gap:16px;padding:16px 4px;border-bottom:1px solid var(--line);align-items:flex-start}
-.watch-item:last-child{border-bottom:none}
-.watch-item .w-icon{font-size:22px;flex-shrink:0;line-height:1.4}
-.watch-item .w-body{flex:1}
-.watch-item h3{font-size:15.5px;color:var(--ink);margin-bottom:4px}
-.watch-item p{font-size:14px;color:var(--ink-dim)}
-.watch-item .w-sig{font-size:12.5px;color:var(--teal);margin-top:6px}
-/* ===== BACK TO TOP ===== */
-.back-top{position:fixed;bottom:26px;right:26px;z-index:800;width:44px;height:44px;border-radius:50%;background:rgba(20,28,43,.9);border:1px solid var(--line2);color:var(--gold-bright);font-size:18px;cursor:pointer;display:none;align-items:center;justify-content:center;transition:opacity .25s,transform .25s;backdrop-filter:blur(8px)}
-.back-top.show{display:flex}
-.back-top:hover{transform:translateY(-3px);border-color:var(--gold-dim)}
-/* ===== FOOTER ===== */
-footer{border-top:1px solid var(--line);padding:44px 0 60px;text-align:center;color:var(--ink-faint);font-size:13px}
-footer .row{margin:6px 0}
-footer b{color:var(--ink-dim)}
-/* ===== RESPONSIVE ===== */
-@media (max-width:900px){
-  section{padding:56px 0}
-  .g3{grid-template-columns:repeat(2,1fr)}
+.chapter-num{
+  font-family:var(--mono);font-size:13px;letter-spacing:.3em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:12px;
 }
-@media (max-width:760px){
-  .nav-links{position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(10,14,20,.97);flex-direction:column;padding:10px 16px 16px;gap:4px;display:none;border-bottom:1px solid var(--line);max-height:70vh;overflow-y:auto}
-  .nav-links.open{display:flex}
-  .nav-links a{padding:10px 12px;font-size:14px}
-  .nav-burger{display:block}
+.chapter-title{
+  font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.3;
+  letter-spacing:-.01em;
 }
-@media (max-width:640px){
-  .wrap{padding:0 16px}
-  section{padding:46px 0}
-  .g2,.g3{grid-template-columns:1fr}
-  .hero{min-height:auto;padding:90px 16px 64px}
-  .card{padding:20px}
-  .quote-block{padding:20px 18px}
-  .sec-head{margin-bottom:26px}
-  .hero .meta{gap:8px;flex-direction:column;align-items:center;width:100%}
-  .pill{padding:6px 14px;font-size:12.5px;width:auto;max-width:100%;text-align:center}
-  .hero h1{font-size:clamp(34px,11vw,44px)}
-  .hero .tagline{margin-top:26px}
-  .bp-card .frame{min-height:160px}
-  td,th{font-size:13px;padding:10px 12px}
-  .back-top{bottom:18px;right:18px;width:40px;height:40px}
+.chapter-desc{
+  margin-top:14px;color:var(--ink-dim);font-size:15px;max-width:620px;line-height:1.8;
 }
+
+/* ── 大数字卡（Tim Cook 记忆点）── */
+.big-num-row{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:20px;margin:44px 0;
+}
+.big-num{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:28px 24px;
+  text-align:center;transition:border-color .3s;
+}
+.big-num:hover{border-color:var(--gold-dim)}
+.big-num .num{
+  font-size:clamp(34px,5vw,52px);font-weight:800;
+  color:var(--gold-bright);line-height:1.1;
+  font-family:var(--mono);
+}
+.big-num .lbl{
+  margin-top:10px;font-size:12.5px;color:var(--ink-dim);
+  letter-spacing:.05em;line-height:1.6;
+}
+.big-num.red .num{color:var(--red)}
+.big-num.teal .num{color:var(--teal)}
+
+/* ── 引语卡 ── */
+.quote-card{
+  margin:48px 0;padding:34px 38px;
+  border-left:3px solid var(--gold);
+  background:linear-gradient(135deg,rgba(212,169,78,.06),transparent 70%);
+  border-radius:0 var(--radius) var(--radius) 0;
+}
+.quote-card .q{
+  font-size:clamp(17px,2.4vw,22px);line-height:1.8;
+  color:var(--ink);font-weight:500;
+}
+.quote-card .q em{color:var(--gold-bright);font-style:normal}
+.quote-card .a{
+  margin-top:14px;font-size:13px;color:var(--ink-dim);
+  letter-spacing:.05em;
+}
+
+/* ── 内容卡 ── */
+.grid{display:grid;gap:20px;margin:36px 0}
+.grid.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.grid.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:26px 24px;
+}
+.card h4{
+  font-size:15px;font-weight:700;margin-bottom:10px;
+  color:var(--gold-bright);
+}
+.card p{font-size:14px;color:var(--ink-dim);line-height:1.8}
+.card .tag{
+  display:inline-block;font-size:11px;padding:2px 10px;
+  border-radius:20px;margin-bottom:12px;letter-spacing:.08em;
+}
+.tag.gold{background:rgba(212,169,78,.15);color:var(--gold-bright)}
+.tag.teal{background:rgba(61,214,200,.12);color:var(--teal)}
+.tag.red{background:rgba(224,92,92,.12);color:var(--red)}
+
+/* ── 反方自检卡 ── */
+.rebuttal{
+  margin:26px 0 0;padding:22px 24px;
+  border:1px dashed var(--line2);border-radius:var(--radius);
+  background:var(--card2);
+}
+.rebuttal .rh{
+  font-size:12px;letter-spacing:.2em;color:var(--yellow);
+  text-transform:uppercase;margin-bottom:8px;
+}
+.rebuttal p{font-size:13.5px;color:var(--ink-dim);line-height:1.75}
+
+/* ── 时间线带 ── */
+.timeline{position:relative;margin:44px 0;padding-left:28px}
+.timeline::before{
+  content:'';position:absolute;left:7px;top:4px;bottom:4px;
+  width:2px;background:linear-gradient(var(--gold-dim),var(--teal));
+}
+.tl-item{position:relative;padding:0 0 34px 20px}
+.tl-item::before{
+  content:'';position:absolute;left:-26px;top:6px;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--gold);
+}
+.tl-item .date{
+  font-family:var(--mono);font-size:13px;color:var(--gold-bright);
+  letter-spacing:.04em;
+}
+.tl-item h4{font-size:15.5px;margin:6px 0 6px;font-weight:700}
+.tl-item p{font-size:14px;color:var(--ink-dim);line-height:1.75}
+.tl-item .src{
+  display:inline-block;margin-top:8px;font-size:11px;
+  color:var(--ink-faint);letter-spacing:.08em;
+}
+
+/* ── 图片卡（可点击放大）── */
+.img-card{
+  margin:36px 0;border-radius:var(--radius);overflow:hidden;
+  border:1px solid var(--line);background:var(--card);
+  cursor:zoom-in;position:relative;
+}
+.img-card img{width:100%;display:block;transition:transform .4s}
+.img-card:hover img{transform:scale(1.015)}
+.img-card .cap{
+  padding:14px 20px;font-size:13px;color:var(--ink-dim);
+  border-top:1px solid var(--line);
+}
+.img-card .zoom{
+  position:absolute;top:14px;right:14px;
+  background:rgba(10,14,20,.7);border-radius:8px;
+  padding:4px 10px;font-size:11px;color:var(--ink);
+  pointer-events:none;
+}
+
+/* ── 判断区（九个判断）── */
+.judge{
+  margin:26px 0;padding:28px 30px;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);border-left:4px solid var(--gold);
+}
+.judge .jh{
+  display:flex;align-items:baseline;gap:14px;margin-bottom:12px;
+}
+.judge .jn{
+  font-family:var(--mono);font-size:13px;color:var(--gold);
+  letter-spacing:.15em;white-space:nowrap;
+}
+.judge h4{font-size:17px;font-weight:700;line-height:1.5}
+.judge p{font-size:14.5px;color:var(--ink-dim);line-height:1.85}
+.judge .rebuttal{margin-top:18px}
+
+/* ── 变量区（四变量）── */
+.var-card{
+  background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:30px 28px;
+  margin:20px 0;border-left:4px solid var(--teal);
+}
+.var-card .vn{
+  font-family:var(--mono);font-size:12px;letter-spacing:.2em;
+  color:var(--teal);text-transform:uppercase;margin-bottom:10px;
+}
+.var-card h4{font-size:18px;margin-bottom:10px;font-weight:700}
+.var-card p{font-size:14.5px;color:var(--ink-dim);line-height:1.85}
+.var-card .val{
+  margin-top:14px;padding:12px 16px;border-radius:8px;
+  font-size:13.5px;line-height:1.7;
+}
+.val.dean{background:rgba(61,214,200,.08);border:1px solid rgba(61,214,200,.25);color:var(--teal)}
+.val.aschen{background:rgba(224,92,92,.08);border:1px solid rgba(224,92,92,.25);color:var(--red)}
+
+/* ── 收尾 ── */
+.footer{
+  max-width:1080px;margin:0 auto;padding:80px 24px 120px;
+  border-top:1px solid var(--line);
+}
+.footer .fh{
+  font-size:12px;letter-spacing:.3em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:18px;
+}
+.footer .src-list{columns:2;gap:30px;margin-bottom:30px}
+.footer .src-list div{
+  font-size:13px;color:var(--ink-dim);padding:7px 0;
+  border-bottom:1px solid var(--line);break-inside:avoid;
+  display:flex;justify-content:space-between;gap:14px;
+}
+.footer .src-list .lv{
+  font-size:10.5px;color:var(--gold);white-space:nowrap;
+  letter-spacing:.08em;
+}
+.footer .sign{font-size:12px;color:var(--ink-faint);letter-spacing:.06em;line-height:2}
+
+/* ── 移动端 ── */
+@media (max-width:720px){
+  .chapter{padding:70px 18px}
+  .hero{padding-top:100px}
+  .footer .src-list{columns:1}
+  nav .nav-links a{font-size:11.5px;padding:6px 7px}
+}
+
+/* ── 滚动进入动画 ── */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.on{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none;transition:none}
 }
-
-/* ===== v10: PART DIVIDER ===== */
-.part{display:flex;align-items:center;gap:14px;margin:64px 0 -8px;padding:0 4px}
-.part::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line2),transparent)}
-.part-no{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--gold);background:rgba(212,169,78,.08);border:1px solid rgba(212,169,78,.25);padding:4px 12px;border-radius:999px;white-space:nowrap}
-.part-name{font-size:13px;color:var(--ink-faint);letter-spacing:.08em}
-/* ===== v10: TLDR ===== */
-.tldr{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative;top:-34px}
-.tldr-item{background:var(--card);border:1px solid var(--line2);border-radius:var(--radius);padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
-.tldr-k{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.1em;flex-shrink:0;padding-top:2px}
-.tldr-v{font-size:13.5px;color:var(--ink-dim);line-height:1.6}
-.tldr-v b{color:var(--ink)}
-/* ===== v10: FOUNDERS TOP ===== */
-.founders-top{display:grid;grid-template-columns:55% 1fr;gap:18px;margin-bottom:34px;align-items:stretch}
-.founders-top .founder-group-shot{margin-top:0}
-.founder-summary{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;display:flex;flex-direction:column;justify-content:center}
-.founder-summary .num{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.2em}
-.founder-summary h3{font-size:17px;color:var(--ink);margin:6px 0 12px}
-.founder-summary ul{list-style:none}
-.founder-summary li{font-size:13.8px;color:var(--ink-dim);padding:5px 0 5px 18px;position:relative}
-.founder-summary li::before{content:"▸";position:absolute;left:0;color:var(--gold)}
-.founder-summary li b{color:var(--gold-bright)}
-/* ===== v10: NAE 通栏 ===== */
-.nae-wrap .nae-card{max-width:760px;margin:0 auto}
-/* ===== v10: LETTER 2x2 ===== */
-.letter-grid{grid-template-columns:repeat(2,1fr)}
-/* ===== v10: BP 封面通栏 ===== */
-.bp-cover{margin-bottom:22px}
-.bp-cover .bp-card{max-width:860px;margin:0 auto}
-/* ===== v10: NAV MORE ===== */
-.nav-more{position:relative}
-.nav-more summary{cursor:pointer;color:var(--ink-dim);font-size:13px;padding:6px 10px;border-radius:6px;list-style:none;display:flex;align-items:center;gap:2px;white-space:nowrap}
-.nav-more summary::-webkit-details-marker{display:none}
-.nav-more summary:hover{color:var(--ink);background:rgba(212,169,78,.08)}
-.nav-more[open] summary{color:var(--gold-bright)}
-.nav-more-links{position:absolute;top:calc(100% + 8px);right:0;background:rgba(15,21,32,.98);backdrop-filter:blur(12px);border:1px solid var(--line2);border-radius:10px;padding:8px;min-width:150px;display:flex;flex-direction:column;gap:2px;box-shadow:0 12px 40px rgba(0,0,0,.5);z-index:950}
-.nav-more-links a{font-size:13px;padding:8px 12px;border-radius:6px;border-bottom:none;white-space:nowrap}
-.nav-more-links a:hover{background:rgba(212,169,78,.1)}
-@media (max-width:900px){
-  .tldr{grid-template-columns:1fr;top:0;margin-top:22px;padding:0 24px}
-  .founders-top{grid-template-columns:1fr}
-}
-@media (max-width:760px){
-  .nav-more-links{position:static;background:transparent;border:none;box-shadow:none;padding:4px 0 4px 8px;min-width:0}
-}
-@media (max-width:640px){
-  .letter-grid{grid-template-columns:1fr}
-  .tldr{padding:0 16px}
-  .part{margin-top:44px}
-}
-
 </style>
 </head>
 <body>
-
-<div class="progress-bar" id="progressBar"></div>
-
-
+<div id="progressBar"></div>
 <nav>
-  <div class="nav-inner">
-    <div class="nav-brand">Discovery Loop<span>深度解读</span></div>
-    <div class="nav-links" id="navLinks">
-      <a href="#founders" data-sec="founders">创始人</a>
-      <a href="#thesis" data-sec="thesis">核心命题</a>
-      <a href="#bp" data-sec="bp">BP 图解</a>
-      <a href="#analysis" data-sec="analysis">九个判断</a>
-      <a href="#watch" data-sec="watch">观察清单</a>
-      <details class="nav-more"><summary>更多 ▾</summary>
-        <div class="nav-more-links">
-          <a href="#letter" data-sec="letter">告别信</a>
-          <a href="#voices" data-sec="voices">原话与推文</a>
-          <a href="#facts" data-sec="facts">公司基本盘</a>
-          <a href="#timeline" data-sec="timeline">时间线</a>
-          <a href="#biz" data-sec="biz">商业模式</a>
-          <a href="#chinese" data-sec="chinese">华人创业者</a>
-          <a href="#sources" data-sec="sources">信源声明</a>
-        </div>
-      </details>
-    </div>
-    <button class="nav-burger" id="navBurger" aria-label="菜单">☰</button>
+  <div class="logo">Discovery <b>Loop</b> · 深度解读</div>
+  <div class="nav-links">
+    <a href="#c1">01 人物</a><a href="#c2">02 命题</a><a href="#c3">03 证据</a>
+    <a href="#c4">04 机制</a><a href="#c5">05 变量</a><a href="#c6">06 判断</a>
   </div>
 </nav>
 
-
+<!-- ═══════════ HERO ═══════════ -->
 <header class="hero">
-  <div class="hero-badge"><span class="dot"></span>深度解读 · 2026-08-08</div>
-  <h1>Discovery Loop</h1>
-  <p class="tagline">用 AI 自动化科学发现的实验循环：<em>“Automating discovery to accelerate science and engineering for the world.”</em></p>
-  <div class="meta">
-    <span class="pill">创始人 <b>Jeff Dean · Sanjay Ghemawat · Oriol Vinyals · Quoc Le</b></span>
-    <span class="pill">治理 <b>公共利益公司 PBC</b></span>
-    <span class="pill">种子轮 <b>Radical + Khosla 联合领投</b></span>
-  </div>
+  <div class="kicker">Automating Discovery · 2026-08-06</div>
+  <h1>四个人，一台<br/><span class="grad">自动造锤子的机器</span></h1>
+  <p class="sub">Jeff Dean 告别 Google 27 年，与三位老友创立 Discovery Loop。不是造更好的锤子，是造一台能自动造锤子的机器：<span class="grad2">自动化科学发现的完整实验循环</span>。</p>
+  <p class="meta">FOUR FOUNDERS · ONE LOOP · THE PRICE OF UNION</p>
+  <div class="scroll-hint">向下探索 ↓</div>
 </header>
-<div class="tldr">
-  <div class="tldr-item"><span class="tldr-k">谁</span><span class="tldr-v"><b>四个造过 Google 基础设施的人</b>（Jeff Dean / Sanjay / Oriol / Quoc）</span></div>
-  <div class="tldr-item"><span class="tldr-k">做什么</span><span class="tldr-v"><b>自动化实验循环</b>：Propose → Run → Evaluate → 迭代，AI 研究 AI 的正循环</span></div>
-  <div class="tldr-item"><span class="tldr-k">凭什么信</span><span class="tldr-v">告别信 / BP 四页 / 官网 / Wired 四方一手证据 + 每个判断附反方自检</span></div>
-</div>
 
+<!-- ═══════════ 01 人物 ═══════════ -->
+<section class="chapter" id="c1">
+  <div class="chapter-head reveal">
+    <div class="chapter-num">01 · The Founders</div>
+    <h2 class="chapter-title">四个建造了 Google 的人</h2>
+    <p class="chapter-desc">这份 BP 的第一页和第二页就是他们自己的简历。共事 14–30 年，撑起 Google 二十年技术底座。</p>
+  </div>
 
+  <div class="big-num-row">
+    <div class="big-num reveal"><div class="num">14–30</div><div class="lbl">年共事 · 四人彼此</div></div>
+    <div class="big-num reveal"><div class="num">&gt;42万</div><div class="lbl">Jeff Dean 总引用 · 全领域最高之一</div></div>
+    <div class="big-num teal reveal"><div class="num">&gt;17万</div><div class="lbl">Sanjay Ghemawat 总引用 · 分布式领域最高</div></div>
+    <div class="big-num red reveal"><div class="num">4400</div><div class="lbl">Jeff Dean 带过的 Research+AI 峰值人数</div></div>
+  </div>
 
-<div class="part"><span class="part-no">PART I · 人物</span><span class="part-name">这四个人</span></div>
+  <div class="img-card reveal">
+    <img src="founders_wired.webp" alt="Discovery Loop 四位创始人合影">
+    <div class="zoom">🔍</div>
+    <div class="cap">左起：Jeff Dean → Oriol Vinyals → Quoc Le → Sanjay Ghemawat · 2026-08-06</div>
+  </div>
 
-
-<section id="founders">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-no">01</span>
-      <h2 class="sec-title">四位创始人</h2>
-      <p class="sec-sub">共事 14–30 年，建造了 Google 二十年技术底座。这份 BP 的第一页和第二页就是他们自己的简历。</p>
+  <div class="grid g2">
+    <div class="card reveal">
+      <span class="tag gold">CEO · 联合创始人</span>
+      <h4>Jeff Dean</h4>
+      <p>Google Fellow、Google Brain 联创，带过 Research+AI 峰值 ~4400 人。Word2Vec 联合提出者，MapReduce / TPU / TensorFlow 核心。总引用 &gt;42 万。</p>
+      <p style="margin-top:10px;font-size:13px;color:var(--ink-faint)">带出：Dario Amodei · Ilya Sutskever · Noam Shazeer · 杨植麟</p>
     </div>
-    <div class="founders-top"><div class="founder-group-shot">
-      <div class="gs-frame" data-lb="founders_wired.webp" data-cap="左起 Jeff Dean → Oriol Vinyals → Quoc Le → Sanjay Ghemawat（2026-08）"><span class="zoom-hint">🔍 点击放大</span><img src="founders_wired.webp" alt="Discovery Loop 四位创始人合影"  width="1920" height="1280"></div>
-      <div class="gs-cap">左起：Jeff Dean → Oriol Vinyals → Quoc Le → Sanjay Ghemawat · 2026-08-06</div>
-      </div>
-      <div class="founder-summary"><div class="num">FOUR FOUNDERS · ONE DECADE</div><h3>14–30 年共事 · Google 技术底座</h3><ul><li>四人共事 <b>14–30 年</b>，建造 Google 二十年技术底座。BP 第一二页就是他们的简历</li><li>Jeff Dean 带过 Research+AI 峰值 <b>~4400 人</b>，总引用 <b>&gt;42 万</b></li><li>Sanjay Ghemawat 分布式系统奠基人，总引用 <b>&gt;17 万</b></li><li>带出：Dario Amodei · Ilya Sutskever · Noam Shazeer · 杨植麟</li></ul></div>
+    <div class="card reveal">
+      <span class="tag teal">联合创始人</span>
+      <h4>Oriol Vinyals</h4>
+      <p>DeepMind VP of Research、CTO，Gemini 预训练团队 ~250 人创建者。Seq2Seq 时代核心。本人承认：假说生成仍是当前 AI 的弱点。</p>
     </div>
-    <div class="founders-list">
-      <div class="founder-row">
-        <div class="fr-idx">01</div>
-        <div class="fr-body">
-          <div class="fr-name">Jeff Dean <span class="fr-role">CEO · 联合创始人</span></div>
-          <div class="fr-desc">Google Fellow、Google Brain 联创，带过 Google Research+AI 峰值 <b>~4400 人</b>。Word2Vec 联合提出者，MapReduce / TPU / TensorFlow 核心；总引用 <b>&gt;42 万</b>，全领域最高之一。</div>
-          <div class="f-sig">带出：Dario Amodei · Ilya Sutskever · Noam Shazeer · 杨植麟</div>
-        </div>
-      </div>
-      <div class="founder-row">
-        <div class="fr-idx">02</div>
-        <div class="fr-body">
-          <div class="fr-name">Oriol Vinyals <span class="fr-role">联合创始人</span></div>
-          <div class="fr-desc">DeepMind VP of Research、CTO，<b>Gemini 预训练团队 ~250 人</b>创建者。Seq2Seq 时代核心（与 Quoc Le 共同奠基），Google Scholar 高引前列。</div>
-          <div class="f-sig">本人承认：假说生成仍是当前 AI 的弱点</div>
-        </div>
-      </div>
-      <div class="founder-row">
-        <div class="fr-idx">03</div>
-        <div class="fr-body">
-          <div class="fr-name">Quoc Le <span class="fr-role">联合创始人</span></div>
-          <div class="fr-desc">Google Brain 联创，AutoML 路线开创者。深度学习先驱（AlexNet 时期即加入），<b>杨植麟/戴子航在 Google Brain 的导师</b>，Transformer-XL/XLNet 背后的推动者。</div>
-          <div class="f-sig">带出：杨植麟 · 戴子航（Transformer-XL/XLNet）</div>
-        </div>
-      </div>
-      <div class="founder-row">
-        <div class="fr-idx">04</div>
-        <div class="fr-body">
-          <div class="fr-name">Sanjay Ghemawat <span class="fr-role">联合创始人</span></div>
-          <div class="fr-desc">Google 分布式系统奠基人，GFS / MapReduce / Bigtable / Spanner 核心作者，<b>撑起整个互联网基础设施的底层框架</b>。总引用 <b>&gt;17 万</b>，分布式系统领域最高。</div>
-          <div class="f-sig">Jeff Dean 三十年老搭档</div>
-        </div>
-      </div>
+    <div class="card reveal">
+      <span class="tag teal">联合创始人</span>
+      <h4>Quoc Le</h4>
+      <p>Google Brain 联创，AutoML 路线开创者。深度学习先驱，杨植麟/戴子航在 Google Brain 的导师，Transformer-XL/XLNet 背后推动者。</p>
+      <p style="margin-top:10px;font-size:13px;color:var(--ink-faint)">带出：杨植麟 · 戴子航</p>
     </div>
+    <div class="card reveal">
+      <span class="tag teal">联合创始人</span>
+      <h4>Sanjay Ghemawat</h4>
+      <p>Google 分布式系统奠基人，GFS / MapReduce / Bigtable / Spanner 核心作者，撑起整个互联网基础设施的底层框架。总引用 &gt;17 万。</p>
+      <p style="margin-top:10px;font-size:13px;color:var(--ink-faint)">Jeff Dean 三十年老搭档</p>
+    </div>
+  </div>
+
+  <div class="quote-card reveal">
+    <div class="q">“Humans have been using AI to do research, <em>not using AI to be a researcher</em>. The fundamental shift.”</div>
+    <div class="a">— Vinod Khosla · Wired 采访</div>
   </div>
 </section>
 
+<!-- ═══════════ 02 命题 ═══════════ -->
+<section class="chapter" id="c2">
+  <div class="chapter-head reveal">
+    <div class="chapter-num">02 · The Thesis</div>
+    <h2 class="chapter-title">核心命题：自动化实验循环</h2>
+    <p class="chapter-desc">这是整份 BP 的灵魂：不是造更好的锤子，是造一台能自动造锤子的机器。</p>
+  </div>
 
-<div class="part"><span class="part-no">PART II · 行动</span><span class="part-name">他们要做什么</span></div>
+  <div class="img-card reveal">
+    <img src="loop_diagram.webp" alt="Common Cycle in many Disciplines 通用循环图">
+    <div class="zoom">🔍</div>
+    <div class="cap">Propose Experiment → Implement and Run → Evaluate →（闭环）→ Our approach: Automate the loop!</div>
+  </div>
 
+  <div class="grid g3">
+    <div class="card reveal">
+      <span class="tag teal">做什么 What</span>
+      <h4>自动化完整实验循环</h4>
+      <p>自动化「提出假设 → 设计实验 → 执行 → 评估 → 迭代」，并行跑成千上万个实验，把科学发现从人肉慢循环变成 AI 快循环。</p>
+    </div>
+    <div class="card reveal">
+      <span class="tag gold">为什么是现在 Why</span>
+      <h4>AI is the researcher</h4>
+      <p>Khosla 领投人原话：AI 不再是研究工具，而是研究者本身。四人过去 20 年建造了 Google 的 AI 基础设施。</p>
+    </div>
+    <div class="card reveal">
+      <span class="tag red">赌什么 Bet</span>
+      <h4>循环跑得多快</h4>
+      <p>一旦实验循环被 AI 跑通，瓶颈不再是人才或算力，而是循环速度。药物、材料、芯片、能源全被拉上快车道：AI 研究 AI 的正循环。</p>
+    </div>
+  </div>
 
-<section id="thesis">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-no">02</span>
-      <h2 class="sec-title">核心命题：自动化实验循环</h2>
-      <p class="sec-sub">这是整份 BP 的灵魂：不是造更好的锤子，是造一台能自动造锤子的机器。</p>
-    </div>
-    <div class="thesis-hero">
-      <div class="frame" data-lb="loop_diagram.webp" data-cap="Common Cycle in many Disciplines：科学与工程通用循环图"><span class="zoom-hint">🔍 点击放大</span><img src="loop_diagram.webp" alt="Common Cycle in many Disciplines 通用循环图" width="1150" height="642"></div>
-      <div class="th-cap"><b>Common Cycle in many Disciplines</b> · The universal loop of science and engineering：Propose Experiment → Implement and Run → Evaluate →（闭环）<br><span class="th-approach">Our approach: Automate the loop! 缩短迭代时间 · 自动提议并批量运行实验 · 从每次评估中学习 · 提升实验质量与规模 → 突破性成果</span></div>
-    </div>
-    <div class="grid g3">
-      <div class="card"><h3>做什么<span class="en">What</span></h3><p>自动化「提出假设 → 设计实验 → 执行 → 评估 → 迭代」的完整实验循环，<b>并行跑成千上万个实验</b>，把科学发现从人肉慢循环变成 AI 快循环。</p></div>
-      <div class="card"><h3>为什么是现在<span class="en">Why</span></h3><p>Khosla 领投人原话：<b>“AI is the researcher.”</b> AI 不再是研究工具，而是研究者本身。四人过去 20 年建造了 Google 的 AI 基础设施，现在要造那台能自动造锤子的机器。</p></div>
-      <div class="card"><h3>赌什么<span class="en">Bet</span></h3><p>一旦实验循环被 AI 跑通，行业瓶颈不再是人才或算力，而是<b>循环跑得多快</b>。药物、材料、芯片、能源全都会被拉上快车道，<b>AI 研究 AI 的正循环</b>。</p></div>
-    </div>
-    <div class="grid g2" style="margin-top:18px">
-      <div class="card"><h3>实验循环<span class="en">The Loop</span></h3>
-        <p style="font-family:var(--mono);font-size:14.5px;color:var(--gold-bright);margin-bottom:12px">propose → implement/run → evaluate → iterate</p>
-        <p>现在的科研是人肉慢循环：提假设、跑实验、看结果、调方案、再来一轮。Discovery Loop 想用 <b>frontier AI + 大规模算力</b> 接管整个流程，同时跑数千个实验，根据结果自动迭代下一轮。</p>
-      </div>
-      <div class="card"><h3>三步路线图<span class="en">Roadmap</span></h3>
-        <ul>
-          <li><b>① Start with ML</b>：先自动化 ML 研究与工程（AutoML 逻辑延伸）</li>
-          <li><b>② Own First Customer</b>：做自己的第一个客户，dogfooding 优化技术栈</li>
-          <li><b>③ NAE Grand Challenges</b>：国家工程院大挑战：更优药物/健康信息学/太阳能经济化/清洁水/网络安全/科学发现工具</li>
-        </ul>
-      </div>
-    </div>
-    <div class="nae-wrap" style="margin-top:18px">
-      <div class="bp-card nae-card">
-        <div class="frame" data-lb="nae_challenges.webp" data-cap="14 项 NAE Grand Challenges"><span class="zoom-hint">🔍 点击放大</span><img src="nae_challenges.webp" alt="NAE 14 项大挑战" width="1146" height="646"></div>
-        <div class="body">
-          <div class="num">原图</div>
-          <h3>NAE 14 项大挑战</h3>
-          <p>告别信明确提到「对 NAE Grand Challenge 问题做出有意义进展」。这张图正是 Dean 推文配图：14 项挑战的完整清单。</p>
-        </div>
-      </div>
-    </div>
-    <div class="quote-block">
-      <p class="q">The research bottleneck isn't generating ideas; it's running experiments. AI will change that.</p>
-      <p class="who"><b>Khosla 投资逻辑</b> · “AI is the researcher.”，与 2018 年投 OpenAI 相提并论</p>
-    </div>
-    <div class="callout co-blue"><b>成立两条件（Jeff Dean 第一性原理）：</b>任务可反复试验 + 结果可可靠评价。这两条同时是「什么适合自动化」的判据，也解释了为何从 ML 起步（假说生成仍是最难的，Vinyals 亲自承认这是当前 AI 弱点）。</div>
+  <div class="big-num-row">
+    <div class="big-num teal reveal"><div class="num">3</div><div class="lbl">步路线图：ML → 自家客户 → NAE 大挑战</div></div>
+    <div class="big-num reveal"><div class="num">14</div><div class="lbl">NAE 国家工程院大挑战 · 告别信明确提及</div></div>
+    <div class="big-num red reveal"><div class="num">2</div><div class="lbl">成立两条件：可反复试验 + 结果可可靠评价</div></div>
+  </div>
+
+  <div class="quote-card reveal">
+    <div class="q">“The research bottleneck isn't generating ideas; <em>it's running experiments</em>. AI will change that.”</div>
+    <div class="a">— Khosla 投资逻辑 · 与 2018 年投 OpenAI 相提并论</div>
   </div>
 </section>
 
+<!-- ═══════════ 03 证据 ═══════════ -->
+<section class="chapter" id="c3">
+  <div class="chapter-head reveal">
+    <div class="chapter-num">03 · The Evidence</div>
+    <h2 class="chapter-title">证据：BP、告别信、时间线</h2>
+    <p class="chapter-desc">一手信源四方交叉：官网全文 + Wired + Google 官方 + BP 图片。每一项都可查证。</p>
+  </div>
 
-<section id="bp">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-no">03</span>
-      <h2 class="sec-title">BP 图解</h2>
-      <p class="sec-sub">史上最「凡尔赛」的路演材料：没有商业模式、没有市场分析，就几页：「我们造过什么」「我们带过谁」「我们的影响力」。</p>
+  <div class="chapter-head reveal" style="margin-bottom:26px">
+    <div class="chapter-num" style="color:var(--gold)">BP · 史上最「凡尔赛」的路演材料</div>
+    <h3 style="font-size:22px;font-weight:700">没有商业模式、没有市场分析，就几页：「我们造过什么」「我们带过谁」「我们的影响力」</h3>
+  </div>
+
+  <div class="grid g2">
+    <div class="img-card reveal">
+      <img src="img_00.webp" alt="BP 封面页">
+      <div class="zoom">🔍</div>
+      <div class="cap">PAGE 00 · 封面 — “Automating discovery to accelerate science and engineering for the world.”</div>
     </div>
-    <div class="bp-cover">
-      <div class="bp-card">
-        <div class="frame" data-lb="img_00.webp" data-cap="BP 封面：DISCOVERY LOOP：Continuous Exploration"><span class="zoom-hint">🔍 点击放大</span><img src="img_00.webp" alt="BP 封面页"  width="1206" height="873"></div>
-        <div class="body">
-          <div class="num">PAGE 00 · 封面</div>
-          <h3>Discovery Loop：Continuous Exploration</h3>
-          <p>“Automating discovery to accelerate science and engineering for the world.” 与官网首页逐字一致。</p>
-        </div>
-      </div>
+    <div class="img-card reveal">
+      <img src="bp_p1_achievements.webp" alt="BP 第一页：我们一起造过什么">
+      <div class="zoom">🔍</div>
+      <div class="cap">PAGE 01 · 我们一起造过什么 — 一部 Google 二十年技术编年史</div>
     </div>
-    <div class="bp-grid">
-      <div class="bp-card">
-        <div class="frame" data-lb="bp_p1_achievements.webp" data-cap="BP 第一页「我们一起造过什么」：四人成就概览"><span class="zoom-hint">🔍 点击放大</span><img src="bp_p1_achievements.webp" alt="BP 第一页：我们一起造过什么" width="1540" height="864"></div>
-        <div class="body">
-          <div class="num">PAGE 01 · 我们一起造过什么</div>
-          <h3>一部 Google 二十年技术编年史</h3>
-          <p>搜索/广告/Gmail/翻译/Gemini/TPU；GFS/MapReduce/Bigtable/Spanner/TensorFlow/Pathways；Word2Vec/Seq2Seq/MoE/蒸馏；AlphaChip/AlphaFold。网友吐槽：「这哥们做出过最好的产品，就是谷歌本身」。</p>
-        </div>
-      </div>
-      <div class="bp-card">
-        <div class="frame" data-lb="bp_p2_founders.webp" data-cap="BP 第二页「我们带过多大的团队，带出过哪些 AI 创业者」"><span class="zoom-hint">🔍 点击放大</span><img src="bp_p2_founders.webp" alt="BP 第二页：我们带出过谁" width="1530" height="868"></div>
-        <div class="body">
-          <div class="num">PAGE 02 · 我们带出过谁</div>
-          <h3>团队管理经验 + 带出的 AI 创业者</h3>
-          <p>Dario Amodei（Anthropic）、Ilya Sutskever、Noam Shazeer（Character.AI）、Physical Intelligence / Thinking Machines / Sakana AI 创始人，以及杨植麟、戴子航、张国栋、任少卿。</p>
-        </div>
-      </div>
-      <div class="bp-card">
-        <div class="frame" data-lb="bp_p3_scholar.webp" data-cap="BP 第三页「学术影响力」：Google Scholar 高引"><span class="zoom-hint">🔍 点击放大</span><img src="bp_p3_scholar.webp" alt="BP 第三页：学术影响力（高引学者）" width="1532" height="864"></div>
-        <div class="body">
-          <div class="num">PAGE 03 · 学术影响力</div>
-          <h3>这个星球上引用量最高的几个人</h3>
-          <p>Jeff Dean 总引用 &gt;42 万次，Sanjay Ghemawat &gt;17 万次；同页还有 Bengio、Hinton、Ilya、Goodfellow、任少卿。翻译：最顶级的两个是我的联合创始人，还有两个是我带出来的。</p>
-        </div>
-      </div>
-      <div class="bp-card">
-        <div class="frame" data-lb="bp_p4_life.webp" data-cap="BP 末页：伦敦/巴塔哥尼亚/越南/加州合影"><span class="zoom-hint">🔍 点击放大</span><img src="bp_p4_life.webp" alt="BP 末页：生活合影" width="1080" height="1739"></div>
-        <div class="body">
-          <div class="num">PAGE 04 · 最后一页</div>
-          <h3>最有松弛感的收尾</h3>
-          <p>伦敦看球、巴塔哥尼亚聚餐、越南坐摩托、加州击掌。「我们在伦敦、巴塔哥尼亚、越南和加州一起工作、一起玩」。共事几十年的默契，本身就是最硬的壁垒。</p>
-        </div>
+    <div class="img-card reveal">
+      <img src="bp_p2_founders.webp" alt="BP 第二页：我们带出过谁">
+      <div class="zoom">🔍</div>
+      <div class="cap">PAGE 02 · 我们带出过谁 — 团队管理经验 + 带出的 AI 创业者</div>
+    </div>
+    <div class="img-card reveal">
+      <img src="bp_p3_scholar.webp" alt="BP 第三页：学术影响力">
+      <div class="zoom">🔍</div>
+      <div class="cap">PAGE 03 · 学术影响力 — 这个星球上引用量最高的几个人</div>
+    </div>
+    <div class="img-card reveal">
+      <img src="bp_p4_life.webp" alt="BP 末页：生活合影">
+      <div class="zoom">🔍</div>
+      <div class="cap">PAGE 04 · 最后一页 — 最有松弛感的收尾：伦敦看球、巴塔哥尼亚聚餐、越南坐摩托、加州击掌</div>
+    </div>
+    <div class="img-card reveal">
+      <img src="nae_challenges.webp" alt="NAE 14 项大挑战">
+      <div class="zoom">🔍</div>
+      <div class="cap">NAE 14 项大挑战 — 告别信明确提到「对 NAE Grand Challenge 问题做出有意义进展」</div>
+    </div>
+  </div>
+
+  <div class="chapter-head reveal" style="margin-top:60px;margin-bottom:26px">
+    <div class="chapter-num" style="color:var(--teal)">告别信 · Jeff Dean 原话</div>
+    <h3 style="font-size:22px;font-weight:700">2026-08-06 离职日，公司成立动机的最权威陈述</h3>
+  </div>
+
+  <div class="quote-card reveal">
+    <div class="q">“My longtime friends and collaborators Sanjay Ghemawat, Oriol Vinyals and Quoc Le and I have been excitedly discussing how <em>AI collaborators can help discover new things</em> with the right kinds of automated loops… we've decided to leave Google to co-found Discovery Loop, a new public benefit corporation whose mission is to <em>automate machine learning, science, and engineering</em> to accelerate discoveries and progress… we believe this approach can make meaningful progress against many of the NAE Grand Challenge problems.”</div>
+    <div class="a">— Jeff Dean 告别信原文（2026-08-06）</div>
+  </div>
+
+  <div class="grid g2">
+    <div class="img-card reveal">
+      <img src="letter_1.webp" alt="Jeff Dean 告别信 1/4">
+      <div class="zoom">🔍</div>
+      <div class="cap">1/4 · 官宣：离开 Google 27 年，与三位老友共创 DiscoLoopAI</div>
+    </div>
+    <div class="img-card reveal">
+      <img src="letter_2.webp" alt="Jeff Dean 告别信 2/4">
+      <div class="zoom">🔍</div>
+      <div class="cap">2/4 · 成立动机：AI 协作发现 + 自动化循环</div>
+    </div>
+    <div class="img-card reveal">
+      <img src="letter_3.webp" alt="Jeff Dean 告别信 3/4">
+      <div class="zoom">🔍</div>
+      <div class="cap">3/4 · 13 个产品用户超 10 亿 · 25 人 → 190,000+ 人</div>
+    </div>
+    <div class="img-card reveal">
+      <img src="letter_4.webp" alt="Jeff Dean 告别信 4/4">
+      <div class="zoom">🔍</div>
+      <div class="cap">4/4 · 致谢 · 最后一天 8/6 · All the best, -Jeff</div>
+    </div>
+  </div>
+
+  <div class="grid g2" style="margin-top:40px">
+    <div class="card reveal">
+      <span class="tag gold">团队文化</span>
+      <h4>与 Pichai 击掌告别</h4>
+      <p>告别信推文配图：全球多地协作与生活瞬间。Pichai 多轮挽留未果后祝福 + 投资 + 算力安排，体面分手。</p>
+      <div style="margin-top:14px"><img src="dean_pichai.webp" alt="Jeff Dean 与 Pichai 击掌合影" style="width:100%;border-radius:8px;border:1px solid var(--line)"></div>
+    </div>
+    <div class="card reveal">
+      <span class="tag teal">创始人原话</span>
+      <h4>推文与访谈</h4>
+      <p>官宣推文 181.6 万查看；自动化实验循环推文；「我们造了一份 pitch deck 给几家 VC。把带出过的人列出来很有趣」。</p>
+      <div class="grid g2" style="margin-top:14px;gap:10px">
+        <img src="dean_announce.webp" alt="Jeff Dean 官宣推文" style="width:100%;border-radius:8px;border:1px solid var(--line)">
+        <img src="dean_loop_tweet.webp" alt="Jeff Dean 自动化实验循环推文" style="width:100%;border-radius:8px;border:1px solid var(--line)">
       </div>
     </div>
   </div>
-</section>
 
+  <div class="chapter-head reveal" style="margin-top:60px;margin-bottom:26px">
+    <div class="chapter-num" style="color:var(--red)">时间线 · 筹备被公开叙事低估</div>
+    <h3 style="font-size:22px;font-weight:700">Wired 说想法「几周前才成型」，但域名元数据揭示了更长的筹备期</h3>
+  </div>
 
-<section id="letter">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-no">04</span>
-      <h2 class="sec-title">告别信：Jeff Dean 原话</h2>
-      <p class="sec-sub">2026-08-06 离职日，Jeff Dean 发布的告别信。这是公司成立动机的最权威陈述。</p>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="date">2025-12-01</div>
+      <h4>discoveryloop.ai 域名注册</h4>
+      <p>NameCheap 注册，隐私保护。比公开早 8 个月，筹备期的第一个脚印。</p>
+      <span class="src">一手 · RDAP 注册数据</span>
     </div>
-    <div class="letter-grid">
-      <div class="letter-item">
-        <div class="l-img" data-lb="letter_1.webp" data-cap="告别信 1/4：离职宣布 + 告别信开头"><span class="zoom-hint">🔍 放大</span><img src="letter_1.webp" alt="Jeff Dean 告别信 1/4"></div>
-        <div class="l-cap">1/4 · 官宣：离开 Google 27 年，与三位老友共创 DiscoLoopAI</div>
-      </div>
-      <div class="letter-item">
-        <div class="l-img" data-lb="letter_2.webp" data-cap="告别信 2/4：成立动机全文"><span class="zoom-hint">🔍 放大</span><img src="letter_2.webp" alt="Jeff Dean 告别信 2/4"></div>
-        <div class="l-cap">2/4 · 成立动机：AI 协作发现 + 自动化循环</div>
-      </div>
-      <div class="letter-item">
-        <div class="l-img" data-lb="letter_3.webp" data-cap="告别信 3/4：13 个十亿级产品"><span class="zoom-hint">🔍 放大</span><img src="letter_3.webp" alt="Jeff Dean 告别信 3/4"></div>
-        <div class="l-cap">3/4 · 13 个产品用户超 10 亿 · 25 人 → 190,000+ 人</div>
-      </div>
-      <div class="letter-item">
-        <div class="l-img" data-lb="letter_4.webp" data-cap="告别信 4/4：结尾致谢"><span class="zoom-hint">🔍 放大</span><img src="letter_4.webp" alt="Jeff Dean 告别信 4/4"></div>
-        <div class="l-cap">4/4 · 致谢 · 最后一天 8/6 · All the best, -Jeff</div>
-      </div>
+    <div class="tl-item reveal">
+      <div class="date">2026-07-21</div>
+      <h4>官网 SSL 证书颁发（仅 www 子域）</h4>
+      <p>CertSpotter 记录的唯一证书，官网上线准备在 7 月下旬。</p>
+      <span class="src">一手 · CertSpotter 证书透明度日志</span>
     </div>
-    <div class="letter-quote">
-      <div class="lq"><b>"</b>My longtime friends and collaborators Sanjay Ghemawat, Oriol Vinyals and Quoc Le and I have been excitedly discussing how AI collaborators can help discover new things with the right kinds of automated loops&hellip; we've decided to leave Google to co-found <b>Discovery Loop</b>, a new public benefit corporation whose mission is to automate machine learning, science, and engineering to accelerate discoveries and progress&hellip; we believe this approach can make meaningful progress against many of the <b>NAE Grand Challenge</b> problems<b>"</b></div>
-      <div class="lq-src">Jeff Dean 告别信原文（2026-08-06）</div>
+    <div class="tl-item reveal">
+      <div class="date">2026-08-04 16:50 UTC</div>
+      <h4>招聘发布 + 官网域名激活</h4>
+      <p>Ashby 发布 Member of Technical Staff（Palo Alto）；同日 20:20 UTC discoveryloop.com 域名记录变更。</p>
+      <span class="src">一手 · Ashby API + Verisign RDAP</span>
     </div>
-    <div class="bp-card" style="margin-top:18px">
-      <div class="frame" data-lb="dean_pichai.webp" data-cap="Jeff Dean 与 Sundar Pichai 击掌合影"><span class="zoom-hint">🔍 点击放大</span><img src="dean_pichai.webp" alt="Jeff Dean 与 Pichai 击掌合影" width="1922" height="1079"></div>
-      <div class="body">
-        <div class="num">团队文化</div>
-        <h3>与 Pichai 击掌告别</h3>
-        <p>告别信推文配图：全球多地协作与生活瞬间：伦敦/巴塔哥尼亚/越南/加州。Pichai 多轮挽留未果后祝福 + 投资 + 算力安排，体面分手。</p>
-      </div>
+    <div class="tl-item reveal">
+      <div class="date">2026-08-05</div>
+      <h4>公开：TechCrunch + Google 博客 + 新闻稿</h4>
+      <p>Pichai 官方声明：「独立公共利益公司，founding investor + Cloud 合作伙伴」。四人组同日官宣。</p>
+      <span class="src">一手 · Google 官方博客原文</span>
     </div>
+    <div class="tl-item reveal">
+      <div class="date">2026-08-06</div>
+      <h4>Wired 独家采访（Steven Levy）</h4>
+      <p>CEO = Jeff Dean 确认；Khosla 投资逻辑原话「AI is the researcher」；pitch deck 只有几页幻灯片，没用 AI 做。</p>
+      <span class="src">一手 · Wired 全文</span>
+    </div>
+    <div class="tl-item reveal">
+      <div class="date">2026-08-07 19:45 UTC</div>
+      <h4>discoveryloop.ai 域名记录变更</h4>
+      <p>疑似所有权转移，与公开时间线呼应，谜团未解（🟡）。</p>
+      <span class="src">一手 · RDAP 变更记录</span>
+    </div>
+  </div>
+
+  <div class="rebuttal reveal">
+    <div class="rh">⚠ 矛盾点 · 反方自检</div>
+    <p>Wired 称 idea「几周前成型」，但 .ai 域名 2025-12 已注册（早 8 个月）。筹备期被公开叙事低估，或域名是早期囤积/收购。注册人隐私保护下无法最终确认（Yellow）。</p>
   </div>
 </section>
 
+<!-- ═══════════ 04 机制 ═══════════ -->
+<section class="chapter" id="c4">
+  <div class="chapter-head reveal">
+    <div class="chapter-num">04 · The Mechanism</div>
+    <h2 class="chapter-title">机制：怎么运转，怎么变现</h2>
+    <p class="chapter-desc">小团队 + 自家 loop 变现。不靠卖 API，靠「自动实验循环」本身。</p>
+  </div>
 
-<div class="part"><span class="part-no">PART III · 证据</span><span class="part-name">凭什么信</span></div>
+  <div class="grid g3">
+    <div class="card reveal">
+      <span class="tag gold">客户模型</span>
+      <h4>小团队 + 高杠杆</h4>
+      <p>不是传统 SaaS 卖给大厂，而是几个人能比大团队更快更高质量做科研。客户 = 需要加速实验的科研组织。</p>
+    </div>
+    <div class="card reveal">
+      <span class="tag teal">自家 loop</span>
+      <h4>Dogfooding</h4>
+      <p>第二步「做自己的第一个客户」= 用自家系统加速自家研究，闭环里跑出价值，再外溢到药物/材料/芯片/能源。</p>
+    </div>
+    <div class="card reveal">
+      <span class="tag red">衡量指标</span>
+      <h4>实验循环数</h4>
+      <p>不是 token/算力：一天一轮 → 一分钟/一小时一轮，并行数千上万个；加上实验质量评估（哪个最有价值/成功概率）。</p>
+    </div>
+  </div>
 
+  <div class="grid g3">
+    <div class="card reveal">
+      <span class="tag gold">治理</span>
+      <h4>公共利益公司 PBC</h4>
+      <p>Google 官方用词 "independent public benefit corporation"，法律保护使命不被季度 KPI 绑架。</p>
+    </div>
+    <div class="card reveal">
+      <span class="tag teal">融资</span>
+      <h4>联合领投 + Alphabet</h4>
+      <p>Radical Ventures + Khosla 领投；Lightspeed、Kleiner Perkins、Doerr 参投；Alphabet founding investor + 第一年算力全包。规模「数亿美元」（🟡）。</p>
+    </div>
+    <div class="card reveal">
+      <span class="tag red">招聘</span>
+      <h4>唯一职位 = 平台级野心</h4>
+      <p>Member of Technical Staff（唯一在招）：post-training / agents / infrastructure / environments / data / evaluations。6 个方向覆盖研究到工程全链路。</p>
+    </div>
+  </div>
 
-<section id="voices">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-no">05</span>
-      <h2 class="sec-title">创始人原话与推文</h2>
-      <p class="sec-sub">Jeff Dean X 推文原文、Wired 独家访谈细节、各方反应。点击图片可放大。</p>
-    </div>
-    <div class="tweet-grid">
-      <div class="tweet">
-        <div class="t-who"><span class="t-avatar">👤</span><b>Jeff Dean</b><span>@JeffDean · 2026-08-06</span></div>
-        <div class="t-body">官宣推文：正式宣布成立 Discovery Loop。<b>181.6 万查看</b>，配图 = 品牌标识 + 四人合影。</div>
-        <div class="t-img"><img src="dean_announce.webp" alt="Jeff Dean 官宣推文（X）" loading="eager"></div>
-      </div>
-      <div class="tweet">
-        <div class="t-who"><span class="t-avatar">👤</span><b>Jeff Dean</b><span>@JeffDean · 2026-08-06</span></div>
-        <div class="t-body">自动化实验循环推文：提出实验 → 实施运行 → 评估 → 反馈回环。「自动化该循环」正是 Discovery Loop 的方法论。</div>
-        <div class="t-img"><img src="dean_loop_tweet.webp" alt="Jeff Dean 自动化实验循环推文（X）" loading="eager"></div>
-      </div>
-      <div class="tweet">
-        <div class="t-who"><span class="t-avatar">👤</span><b>Jeff Dean</b><span>@JeffDean · 2026-08-06</span></div>
-        <div class="t-body">“We created a pitch deck to tell a handful of VC firms about us… It was fun putting together the list of people in our teams who have gone on to found a whole range of exciting companies.”</div>
-        <div class="t-img"><img src="dean_funding_tweet.webp" alt="Jeff Dean 融资推文+团队幻灯片（X）" loading="eager"></div>
-        <div class="t-meta">路演 PPT 细节 · 种子轮由 Radical + Khosla 领投，Lightspeed / Kleiner Perkins / Doerr / Alphabet 参投</div>
-      </div>
-      <div class="tweet">
-        <div class="t-who"><span class="t-avatar">💜</span><b>Radical Ventures</b><span>Jules Qiu · 2026-08-06</span></div>
-        <div class="t-body">“我们刚刚领投了 Discovery Loop… 恰好一年前我从 Coatue 离开，加入新型 AI 基金 Radical Ventures… 我们联合领投了 Discovery Loop 的创始轮。”</div>
-        <div class="t-img"><img src="tweet_radical.webp" alt="Radical Ventures Jules Qiu 领投宣布" loading="eager"></div>
-        <div class="t-meta">联合领投宣布 · 小红书/公众号</div>
-      </div>
-      <div class="tweet">
-        <div class="t-who"><span class="t-avatar">👤</span><b>Vinod Khosla</b><span>Khosla Ventures · 2026-08</span></div>
-        <div class="t-body">“Honored to be selected to co-lead when you could pick almost any VC firm in the valley or the world! Almost unbelievably impressive list of accomplishments.”</div>
-        <div class="t-img"><img src="tweet_khosla.webp" alt="Khosla 发帖" loading="eager"></div>
-        <div class="t-meta">发帖炫耀被选中领投 · 与 2018 投 OpenAI 相提并论</div>
-      </div>
-    </div>
-    <div class="pull-row">
-      <div class="pull"><div class="p-q">With this team, I wouldn’t need to know what they were doing before I backed them. It’s the ultimate superstar team.</div><div class="p-who"><b>Vinod Khosla</b> · Wired 采访</div></div>
-      <div class="pull"><div class="p-q">Humans have been using AI to do research, not using AI to be a researcher. The fundamental thing is that AI is the researcher.</div><div class="p-who"><b>Vinod Khosla</b> · 投资逻辑</div></div>
-      <div class="pull"><div class="p-q">In a large organization there is always a lot of inertia you have to overcome to make any radical changes. We want to build something different.</div><div class="p-who"><b>Oriol Vinyals</b> · Wired 采访</div></div>
-    </div>
-    <div class="quote-block" style="margin-top:26px">
-      <p class="q">Pichai 多轮会议挽留四人（tried over multiple meetings to get them to keep their badges），最终祝福 + 投资 + 算力安排。</p>
-      <p class="who"><b>离职谈判细节</b> · Wired 独家 · VC 会面保密：Khosla 周六在 Sand Hill Road 办公室密会，其余在 Dean 家进行</p>
-    </div>
+  <div class="quote-card reveal">
+    <div class="q">“We created a pitch deck to tell a handful of VC firms about us… <em>It was fun putting together the list of people</em> in our teams who have gone on to found a whole range of exciting companies.”</div>
+    <div class="a">— Jeff Dean · 融资推文</div>
   </div>
 </section>
 
+<!-- ═══════════ 05 变量 ═══════════ -->
+<section class="chapter" id="c5">
+  <div class="chapter-head reveal">
+    <div class="chapter-num">05 · The Variables</div>
+    <h2 class="chapter-title">决定成败的四个变量</h2>
+    <p class="chapter-desc">什么会决定这台「自动造锤子的机器」是革命还是泡沫。</p>
+  </div>
 
-<section id="facts">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-no">06</span>
-      <h2 class="sec-title">公司基本盘</h2>
-      <p class="sec-sub">CEO / 董事会 / 治理 / 融资 / 招聘，每一项都有独立来源可查。</p>
-    </div>
-    <div class="grid g2">
-      <div class="card"><h3>创始人团队<span class="en">Four Founders</span></h3>
-        <ul>
-          <li><b>Jeff Dean</b>：CEO。Google Fellow，Google Brain ~600 人 → Research+AI 峰值 ~4400 人；Word2Vec 联合提出者、MapReduce/TPU/TensorFlow 核心</li>
-          <li><b>Sanjay Ghemawat</b>：分布式系统奠基人，GFS/MapReduce/Bigtable/Spanner 核心作者，引用 &gt;17 万</li>
-          <li><b>Oriol Vinyals</b>：DeepMind CTO，Gemini 预训练团队 ~250 人创建者，Seq2Seq 时代核心</li>
-          <li><b>Quoc Le</b>：Google Brain 核心，Transformer-XL/XLNet 导师，AutoML 路线开创者</li>
-        </ul>
-      </div>
-      <div class="card"><h3>治理与架构<span class="en">Structure</span></h3>
-        <ul>
-          <li><b>公共利益公司（PBC）</b>：Google 官方用词 "independent public benefit corporation"，法律保护使命不被季度 KPI 绑架</li>
-          <li><b>董事会</b>：Jordan Jacobs（Radical Ventures 管理合伙人）</li>
-          <li><b>办公室</b>：Palo Alto，加州（Ashby 招聘数据确认，非远程）</li>
-          <li><b>团队规模</b>：lean in-person 团队，创始四人 + 招聘中</li>
-        </ul>
-      </div>
-      <div class="card"><h3>融资结构<span class="en">Funding</span></h3>
-        <ul>
-          <li><b>联合领投</b>：Radical Ventures + Khosla Ventures</li>
-          <li><b>参投</b>：Lightspeed、Kleiner Perkins、Doerr Capital</li>
-          <li><b>Alphabet</b>：founding investor 参投 + <b>第一年算力全包</b>（长期云计算合作）</li>
-          <li><b>规模</b>：Axios 引知情人士：「数亿美元」（🟡 未官方确认）</li>
-        </ul>
-      </div>
-      <div class="card"><h3>招聘实况<span class="en">Hiring</span></h3>
-        <ul>
-          <li><b>职位</b>：Member of Technical Staff（唯一在招）</li>
-          <li><b>方向</b>：post-training / agents / infrastructure / environments / data / evaluations</li>
-          <li><b>发布时间</b>：2026-08-04 16:50 UTC（公开前一天，Ashby 数据）</li>
-          <li><b>信号</b>：6 个方向覆盖研究到工程全链路 = 平台级野心</li>
-        </ul>
-      </div>
-    </div>
+  <div class="var-card reveal">
+    <div class="vn">Variable 01 · 递归自我改进</div>
+    <h4>隐藏杀手锏</h4>
+    <p>明面 AI4S，暗线是「用 AI 造更强的 AI」。递归跑通 = OpenAI 级叙事，这才是 Alphabet 供血的真正原因。</p>
+    <div class="val dean">硅谷视角：递归改进是业界共识目标，差异化在四人组的系统级经验。</div>
+  </div>
+  <div class="var-card reveal">
+    <div class="vn">Variable 02 · 假说生成瓶颈</div>
+    <h4>Vinyals 亲口承认的弱点</h4>
+    <p>成立两条件恰好排除假说生成难题，聚焦可反复试验+可可靠评价的 ML 领域。聪明但保守：最需要突破的理论物理/临床医学不在射程。</p>
+    <div class="val aschen">华尔街视角：NAE 大挑战路线图说明他们不打算永远待在 ML 舒适区。</div>
+  </div>
+  <div class="var-card reveal">
+    <div class="vn">Variable 03 · AutoML 的第二次机会</div>
+    <h4>第二次机会，还是第二次泡沫？</h4>
+    <p>AutoML/NAS 2017 年吹过一轮（Google 自己就是旗手），后来在真实科研中渗透有限。这次赌的是「自动化整个实验循环」而非只搜模型架构。</p>
+    <div class="val dean">硅谷视角：4 个建过 Google 基础设施的人 + 算力全包 + 明确路线图，与前一次不可同日而语。</div>
+  </div>
+  <div class="var-card reveal">
+    <div class="vn">Variable 04 · 时间尺度</div>
+    <h4>第一个 loop 产出要等一年</h4>
+    <p>FutureSearch（非一手）中位数预测：首个 ML 产出 2027-08、20 员工 2027-06、首个商业化 2029-01；芯片设计突破概率 38%、材料 28%、临床最低 12-19%。</p>
+    <div class="val aschen">华尔街视角：预测基于公开信息外推，对「递归自我改进」这类非线性变量估计能力有限，只能当标尺。</div>
+  </div>
+
+  <div class="quote-card reveal">
+    <div class="q">“With this team, I wouldn't need to know what they were doing before I backed them. <em>It's the ultimate superstar team.</em>”</div>
+    <div class="a">— Vinod Khosla · Wired 采访</div>
   </div>
 </section>
 
+<!-- ═══════════ 06 判断 ═══════════ -->
+<section class="chapter" id="c6">
+  <div class="chapter-head reveal">
+    <div class="chapter-num">06 · The Judgment</div>
+    <h2 class="chapter-title">九个判断 · 每个都附反方自检</h2>
+    <p class="chapter-desc">对抗式分析：先给判断，再正面回应能让它站不住的反方论点。</p>
+  </div>
 
-<section id="timeline">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-no">07</span>
-      <h2 class="sec-title">时间线：筹备被公开叙事低估</h2>
-      <p class="sec-sub">Wired 采访说想法「几周前才成型」，但域名元数据揭示了更长的筹备期。</p>
-    </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="date">2025-12-01</div>
-        <h3>discoveryloop.ai 域名注册</h3>
-        <p>NameCheap 注册，隐私保护。比公开早 8 个月，筹备期的第一个脚印。</p>
-        <div class="src"><b>一手</b> · RDAP 注册数据</div>
-      </div>
-      <div class="tl-item">
-        <div class="date">2026-07-21</div>
-        <h3>官网 SSL 证书颁发（仅 www 子域）</h3>
-        <p>CertSpotter 记录的唯一证书，官网实际上线准备在 7 月下旬。</p>
-        <div class="src"><b>一手</b> · CertSpotter 证书透明度日志</div>
-      </div>
-      <div class="tl-item">
-        <div class="date">2026-08-04 16:50 UTC</div>
-        <h3>招聘发布 + 官网域名激活</h3>
-        <p>Ashby 招聘系统发布 Member of Technical Staff（Palo Alto）；同日 20:20 UTC discoveryloop.com 域名记录变更（收购的老域名，GoDaddy NS，2009 年注册）。</p>
-        <div class="src"><b>一手</b> · Ashby API + Verisign RDAP</div>
-      </div>
-      <div class="tl-item">
-        <div class="date">2026-08-05</div>
-        <h3>公开：TechCrunch + Google 博客 + 新闻稿</h3>
-        <p>Pichai 官方声明：「独立公共利益公司，founding investor + Cloud 合作伙伴」。四人组同日官宣。</p>
-        <div class="src"><b>一手</b> · Google 官方博客原文</div>
-      </div>
-      <div class="tl-item">
-        <div class="date">2026-08-06</div>
-        <h3>Wired 独家采访（Steven Levy）</h3>
-        <p>CEO = Jeff Dean 确认；Khosla 投资逻辑原话「AI is the researcher」；pitch deck 实际只有几页幻灯片，没用 AI 做。</p>
-        <div class="src"><b>一手</b> · Wired 全文</div>
-      </div>
-      <div class="tl-item">
-        <div class="date">2026-08-07 19:45 UTC</div>
-        <h3>discoveryloop.ai 域名记录变更</h3>
-        <p>疑似所有权转移，与公开时间线呼应，谜团未解（🟡）。</p>
-        <div class="src"><b>一手</b> · RDAP 变更记录</div>
-      </div>
-    </div>
-    <details class="fold"><summary>矛盾点：筹备期被公开叙事低估？（.ai 域名之谜）</summary>
-      <div class="callout co-yellow"><b>矛盾点：</b>Wired 称 idea「几周前成型」，但 .ai 域名 2025-12 已注册（早 8 个月）。筹备期被公开叙事低估，或域名是早期囤积/收购，注册人隐私保护下无法最终确认（Yellow）。</div>
-    </details>
+  <div class="judge reveal">
+    <div class="jh"><span class="jn">01</span><h4>制度性回答：大厂失血的结构信号</h4></div>
+    <p>Alphabet 自己投资 + 供算力 = 承认体内做不了、但不想失去这些人；PBC 是法律层面的耐心资本承诺。2026 夏 Google 流失的是「建造基础设施本身的人」：Jumper→Anthropic、Shazeer→OpenAI、Dean 四人组→自立。行业权力从大厂向创始人的质变点。</p>
+    <div class="rebuttal"><div class="rh">反方自检</div><p>大厂依然垄断算力与分发，创始人公司多数依赖大厂供血（本例 Alphabet 就是 founding investor），Google 入股也可能是战略看门人。</p></div>
+  </div>
+
+  <div class="judge reveal">
+    <div class="jh"><span class="jn">02</span><h4>隐藏杀手锏 = 递归自我改进</h4></div>
+    <p>明面 AI4S，暗线是「用 AI 造更强的 AI」。递归跑通 = OpenAI 级叙事，这才是 Alphabet 供血的真正原因。</p>
+    <div class="rebuttal"><div class="rh">反方自检</div><p>递归改进是业界共识目标，Google 内部 Gemini 团队同样在做，差异化在于四人组的系统级经验。</p></div>
+  </div>
+
+  <div class="judge reveal">
+    <div class="jh"><span class="jn">03</span><h4>前两年实质是 AutoML 加速器</h4></div>
+    <p>成立两条件恰好排除假说生成难题（Vinyals 承认是弱点），聚焦可反复试验+可可靠评价的 ML 领域。聪明但保守。</p>
+    <div class="rebuttal"><div class="rh">反方自检</div><p>NAE 大挑战路线图说明他们不打算永远待在 ML 舒适区。</p></div>
+  </div>
+
+  <div class="judge reveal">
+    <div class="jh"><span class="jn">04</span><h4>AutoML 的第二次机会，还是第二次泡沫？</h4></div>
+    <p>AutoML/NAS 2017 年吹过一轮（Google 自己就是旗手：NASNet/Evolved Transformer），后来在真实科研中渗透有限。自动化模型搜索没有颠覆研究范式。这次赌的是「自动化整个实验循环」而非只搜模型架构。</p>
+    <div class="rebuttal"><div class="rh">反方自检</div><p>这次有 4 个建过 Google 基础设施的人 + 算力全包 + 明确路线图，与前一次不可同日而语；「循环」框架天然覆盖超参/数据/评估全栈。</p></div>
+  </div>
+
+  <div class="judge reveal">
+    <div class="jh"><span class="jn">05</span><h4>Khosla 押的不是技术，是 Jeff Dean 本人</h4></div>
+    <p>"AI is the researcher" 是漂亮的营销叙事，但真正的护城河是创始人名望带来的资本引力。「VC 排队送钱还被挑着收」，在估值和后续融资上是自我强化的飞轮。</p>
+    <div class="rebuttal"><div class="rh">反方自检</div><p>Khosla 2018 押 OpenAI 赌的是赛道不是人（当时 Ilya 尚无今日名望）；这次人和赛道兼备，叙事只是结果不是原因。</p></div>
+  </div>
+
+  <div class="judge reveal">
+    <div class="jh"><span class="jn">06</span><h4>谁受损？风险的真实落点</h4></div>
+    <p>如果「AI 自动化实验循环」真跑通：① 学术界：不可复现危机放大、论文工厂获得加速器；② 传统 AutoML 创业公司：被降维打击；③ 科研资助体系：「实验快」重估「洞察贵」。</p>
+    <div class="rebuttal"><div class="rh">反方自检</div><p>这些风险都在 5-10 年尺度，且多数是「好问题的坏副作用」，不改变核心判断。</p></div>
+  </div>
+
+  <div class="judge reveal">
+    <div class="jh"><span class="jn">07</span><h4>「8/4 系统性筹备」修正了「几周仓促」叙事</h4></div>
+    <p>招聘 8/4 发布 + 域名 8/4 激活 + 官网证书 7/21 + .ai 域名 2025-12 注册，上线动作是系统性的，不是几周即兴。</p>
+    <div class="rebuttal"><div class="rh">反方自检</div><p>8/4 只能证明「上线准备日」，不能证明「筹备期长度」。.ai 域名之谜未解，仍标 Yellow。</p></div>
+  </div>
+
+  <div class="judge reveal">
+    <div class="jh"><span class="jn">08</span><h4>外部预测：第一个 loop 产出要等一年</h4></div>
+    <p>FutureSearch（非一手，8/6 独立分析）中位数预测：首个 ML 产出 2027-08、20 员工 2027-06、ML 外首个成果 2030-08、首个商业化 2029-01；芯片设计突破概率 38%（2028 前）、材料 28%、临床最低 12-19%。</p>
+    <div class="rebuttal"><div class="rh">反方自检</div><p>预测基于公开信息外推，对「递归自我改进」这类非线性变量估计能力有限，只能当标尺，不是事实。</p></div>
+  </div>
+
+  <div class="judge reveal">
+    <div class="jh"><span class="jn">09</span><h4>访谈透露的团队文化：拒绝惯性，拥抱自由</h4></div>
+    <p>Wired 细节：Pichai 多轮会议挽留、Khosla 周六 Sand Hill Road 密会保密、其余会面在 Dean 家、pitch deck 没用 AI 做、四人「同事兼度假好友」。极度自信 + 极度低调 + 极度互信。</p>
+    <div class="rebuttal"><div class="rh">反方自检</div><p>「没用 AI 做 PPT」可能只是时间仓促而非原则立场，但结合四人 AI 地位，更可能是对工具价值的清醒判断。</p></div>
   </div>
 </section>
 
-
-<section id="biz">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-no">08</span>
-      <h2 class="sec-title">商业模式：小团队 + 自家 loop 变现</h2>
-      <p class="sec-sub">Wired 披露的闭环：不靠卖 API，靠「自动实验循环」本身。</p>
-    </div>
-    <div class="grid g3">
-      <div class="card"><h3>客户模型<span class="en">Customers</span></h3><p>不是传统 SaaS 卖给大厂，而是<b>小团队 + 高杠杆</b>：几个人能比大团队更快更高质量做科研。客户 = 需要加速实验的科研组织。</p></div>
-      <div class="card"><h3>自家 loop<span class="en">Dogfooding</span></h3><p>第二步「做自己的第一个客户」= 用自家系统加速自家研究，<b>闭环里跑出价值</b>，再外溢到药物/材料/芯片/能源。</p></div>
-      <div class="card"><h3>衡量指标<span class="en">Metric</span></h3><p>实验循环数（不是 token/算力）：一天一轮 → 一分钟/一小时一轮，并行数千上万个；加上实验质量评估（哪个最有价值/成功概率/先投哪个方向）。</p></div>
-    </div>
+<!-- ═══════════ 收尾 ═══════════ -->
+<footer class="footer">
+  <div class="fh">信源声明 · 一手信源四方交叉</div>
+  <div class="src-list">
+    <div><span>官网全文 discoveryloop.com</span><span class="lv">一手 · 8/8 直取</span></div>
+    <div><span>BP 图解图片（封面+四页）</span><span class="lv">一手 · 用户提供</span></div>
+    <div><span>Wired 独家采访</span><span class="lv">一手 · 全文</span></div>
+    <div><span>Google 官方博客（Pichai 声明）</span><span class="lv">一手 · 全文</span></div>
+    <div><span>Ashby 招聘 API</span><span class="lv">一手 · API 直取</span></div>
+    <div><span>域名元数据 RDAP/CertSpotter</span><span class="lv">一手 · 注册时间线</span></div>
+    <div><span>Jeff Dean 告别信 + 推文</span><span class="lv">一手 · 用户提供</span></div>
+    <div><span>FutureSearch 预测</span><span class="lv">🟡 参考标尺</span></div>
+    <div><span>Axios「数亿美元」</span><span class="lv">🟡 未官方确认</span></div>
+    <div><span>SEC EDGAR Form D 检索 0 命中</span><span class="lv">负结果=证据</span></div>
   </div>
-</section>
-
-
-<div class="part"><span class="part-no">PART IV · 判断</span><span class="part-name">怎么看</span></div>
-
-
-<section id="chinese">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-no">09</span>
-      <h2 class="sec-title">华人创业者：带出过谁</h2>
-      <p class="sec-sub">Dario Amodei（Anthropic）、Ilya Sutskever、Noam Shazeer（Character.AI）撑起 AI 创业圈半壁江山，但名单上还有四位华人创业者。</p>
-    </div>
-    <div class="grid g2">
-      <div class="card card-featured"><h3>杨植麟<span class="en">Yang Zhilin · 月之暗面</span></h3><p>CMU 读博期间进入 Google Brain 与 Quoc Le 合作，共著 <b>Transformer-XL + XLNet</b>（突破固定文本窗口）；创办月之暗面做出 <b>Kimi</b>，长文本能力是最早出圈的标签。<b>BP 里四位华人创业者的头牌</b>。带出过的人里，他是唯一独立做出百亿级公司的。</p></div>
-      <div class="grid g3">
-        <div class="card"><h3>戴子航<span class="en">Zihang Dai · xAI</span></h3><p>杨植麟老搭档，Transformer-XL/XLNet 共同一作，斯坦福 LTI 博士，后加入 <b>xAI 创始团队</b>。</p></div>
-        <div class="card"><h3>张国栋<span class="en">Guodong Zhang · xAI</span></h3><p>浙大校友，Google Brain/DeepMind 实习经历，<b>xAI 最初创始团队成员</b>。</p></div>
-        <div class="card"><h3>任少卿<span class="en">Shaoqing Ren</span></h3><p><b>Faster R-CNN 核心作者</b>，Google Scholar 高引页同框出现；后投身自动驾驶领域。</p></div>
-      </div>
-    </div>
-    <details class="fold"><summary>一个信号：华人创业者名单的全球化注脚</summary>
-      <div class="callout co-blue"><b>一个信号：</b>BP 专门列出四位华人创业者。Google Brain 时代的中美技术纽带，是这份 BP 里最容易被忽略的全球化注脚。杨植麟「也在上面」，但身份是「带出过的创业者」而非创始人/投资人。</div>
-    </details>
+  <div class="sign">
+    Discovery Loop · 深度解读专题<br>
+    信源：discoveryloop.com · Wired · Google Blog · TechCrunch · 量子位 · Ashby · RDAP · CertSpotter<br>
+    存档：archive/discovery-loop/ · 2026-08-08 · v3 叙事骨架版
   </div>
-</section>
-
-
-<section id="analysis">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-no">10</span>
-      <h2 class="sec-title">九个判断</h2>
-      <p class="sec-sub">对抗式分析：每个判断都附反方自检。</p>
-    </div>
-    <div class="analyst">
-      <div class="n">JUDGMENT 01</div>
-      <h3>制度性回答：大厂失血的结构信号</h3>
-      <p>Alphabet 自己投资 + 供算力 = 承认体内做不了、但不想失去这些人；PBC 是法律层面的耐心资本承诺。同时 2026 夏 Google 流失的是「建造基础设施本身的人」：Jumper→Anthropic、Shazeer→OpenAI、Dean 四人组→自立，行业权力从大厂向创始人的质变点。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>大厂依然垄断算力与分发，创始人公司多数依赖大厂供血（本例 Alphabet 就是 founding investor），Google 入股也可能是战略看门人，先观察再决定是否反击。</p></details>
-    </div>
-    <div class="analyst">
-      <div class="n">JUDGMENT 02</div>
-      <h3>隐藏杀手锏 = 递归自我改进</h3>
-      <p>明面 AI4S，暗线是「用 AI 造更强的 AI」。递归跑通 = OpenAI 级叙事，这才是 Alphabet 供血的真正原因。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>递归改进是业界共识目标，Google 内部 Gemini 团队同样在做，差异化在于四人组的系统级经验。</p></details>
-    </div>
-    <div class="analyst">
-      <div class="n">JUDGMENT 03</div>
-      <h3>前两年实质是 AutoML 加速器</h3>
-      <p>成立两条件恰好排除假说生成难题（Vinyals 承认是弱点），聚焦可反复试验+可可靠评价的 ML 领域。聪明但保守：最需要突破的理论物理/临床医学不在射程。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>NAE 大挑战路线图说明他们不打算永远待在 ML 舒适区。</p></details>
-    </div>
-    <div class="analyst">
-      <div class="n">JUDGMENT 04</div>
-      <h3>AutoML 的第二次机会，还是第二次泡沫？</h3>
-      <p>AutoML/NAS 2017 年吹过一轮（Google 自己就是旗手：NASNet/Evolved Transformer），后来在真实科研中渗透有限。自动化模型搜索没有颠覆研究范式。<b>质疑：</b>Discovery Loop 是换个名字重来，还是真的找到了突破口（这次赌的是「自动化整个实验循环」而非只搜模型架构）？<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>这次有 4 个建过 Google 基础设施的人 + 算力全包 + 明确路线图，与前一次不可同日而语；且「循环」框架天然覆盖超参/数据/评估全栈，不止架构搜索。</p></details>
-    </div>
-    <div class="analyst">
-      <div class="n">JUDGMENT 05</div>
-      <h3>Khosla 押的不是技术，是 Jeff Dean 本人</h3>
-      <p>“AI is the researcher” 是漂亮的营销叙事，但真正的护城河是创始人名望带来的资本引力。「VC 排队送钱还被挑着收」，这在估值和后续融资上是自我强化的飞轮。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>Khosla 2018 押 OpenAI 赌的是赛道不是人（当时 Ilya 尚无今日名望）；这次人和赛道兼备，叙事只是结果不是原因。</p></details>
-    </div>
-    <div class="analyst">
-      <div class="n">JUDGMENT 06</div>
-      <h3>谁受损？风险的真实落点</h3>
-      <p>如果「AI 自动化实验循环」真跑通：①<b>学术界</b>：不可复现危机放大、论文工厂获得加速器；②<b>传统 AutoML 创业公司</b>：被降维打击；③<b>科研资助体系</b>：「实验快」重估「洞察贵」。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>这些风险都在 5-10 年尺度，且多数是「好问题的坏副作用」，不改变核心判断。</p></details>
-    </div>
-    <div class="analyst">
-      <div class="n">JUDGMENT 07</div>
-      <h3>「8/4 系统性筹备」修正了「几周仓促」叙事</h3>
-      <p>招聘 8/4 发布 + 域名 8/4 激活 + 官网证书 7/21 + .ai 域名 2025-12 注册，上线动作是系统性的，不是几周即兴。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>8/4 只能证明「上线准备日」，不能证明「筹备期长度」。.ai 域名之谜未解，仍标 Yellow。</p></details>
-    </div>
-    <div class="analyst">
-      <div class="n">JUDGMENT 08</div>
-      <h3>外部预测：第一个 loop 产出要等一年（FutureSearch）</h3>
-      <p>FutureSearch（非一手，8/6 独立分析）中位数预测：首个 ML 产出 <b>2027-08</b>、20 员工 <b>2027-06</b>、ML 外首个成果 <b>2030-08</b>、首个商业化 <b>2029-01</b>；芯片设计突破概率 <b>38%</b>（2028 前，AlphaChip 前身）、材料 28%、临床最低 12-19%。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>预测基于公开信息外推，对「递归自我改进」这类非线性变量估计能力有限，只能当标尺，不是事实。</p></details>
-    </div>
-    <div class="analyst">
-      <div class="n">JUDGMENT 09</div>
-      <h3>访谈透露的团队文化：拒绝惯性，拥抱自由</h3>
-      <p>Wired 细节：Pichai <b>多轮会议挽留</b>（keep their badges）、Khosla <b>周六 Sand Hill Road 密会保密</b>、其余会面在 Dean 家、pitch deck <b>没用 AI 做</b>（“a few slides with our backgrounds and a rough sketch”）、四人“同事兼度假好友”。这些细节拼出：极度自信（不需要精美 PPT）+ 极度低调（保密到周六）+ 极度互信（度假好友共事）。<details class="fold-inline"><summary>反方自检</summary><p><b>反方：</b>「没用 AI 做 PPT」可能只是时间仓促而非原则立场，但结合四人 AI 地位，更可能是对工具价值的清醒判断。</p></details>
-    </div>
-  </div>
-</section>
-
-
-<section id="watch">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-no">11</span>
-      <h2 class="sec-title">观察清单：接下来看什么</h2>
-      <p class="sec-sub">以下三个信号出现时，结论需要更新。</p>
-    </div>
-    <div class="watch-item">
-      <div class="w-icon">💰</div>
-      <div class="w-body">
-        <h3>种子轮 close 后 SEC EDGAR Form D</h3>
-        <p>目前 Form D 检索 0 命中（负结果=证据），说明融资未 close 或低于申报门槛。一旦 close，金额与投资者名单将公开，验证「数亿美元」与 Khosla 领投叙事。</p>
-        <div class="w-sig">信号：EDGAR 出现 Discovery Loop 的 Form D 备案</div>
-      </div>
-    </div>
-    <div class="watch-item">
-      <div class="w-icon">🔬</div>
-      <div class="w-body">
-        <h3>首个产出：模型还是论文？</h3>
-        <p>AutoML 第二次机会的判据 = 第一个可验证的「循环加速」案例。如果 12 个月内只有招聘没有产出，泡沫论占上风。</p>
-        <div class="w-sig">信号：arxiv 出现 Discovery Loop 署名论文 / 开源实验循环框架</div>
-      </div>
-    </div>
-    <div class="watch-item">
-      <div class="w-icon">👥</div>
-      <div class="w-body">
-        <h3>招聘规模：4 人 → 10+ 人？</h3>
-        <p>Ashby 目前只有 1 个职位。如果季度内扩到 5-10 个（覆盖基础设施/评估/平台工程），说明算力+数据管线已铺开；如果一直不扩，说明还在探索期。</p>
-        <div class="w-sig">信号：Ashby job board 职位数增长曲线</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<div class="part"><span class="part-no">附录</span><span class="part-name">信源与方法</span></div>
-
-
-<section id="sources">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-no">12</span>
-      <h2 class="sec-title">信源声明</h2>
-      <p class="sec-sub">所有事实均来自实际抓取，不凭预训练知识。信源分级标注如下。</p>
-    </div>
-    <details class="fold">
-      <summary>查看完整信源声明（15 项）</summary>
-      <div class="table-wrap">
-      <table>
-        <thead><tr><th>层级</th><th>材料</th><th>状态</th></tr></thead>
-        <tbody>
-          <tr><td><span class="ok">一手</span></td><td><b>官网全文</b> discoveryloop.com（真正的官网，非 .ai）</td><td>8/8 直取 HTTP 200</td></tr>
-          <tr><td><span class="ok">一手</span></td><td><b>BP 图解图片</b>（封面为官方品牌标识图 / 第一至四页，含此前缺页的第二页）</td><td>用户提供 2026-08-08</td></tr>
-          <tr><td><span class="ok">一手</span></td><td><b>Wired 独家采访</b>（Steven Levy，launch 前四人全员受访）</td><td>全文</td></tr>
-          <tr><td><span class="ok">一手</span></td><td><b>Google 官方博客</b> Pichai 声明原文</td><td>全文</td></tr>
-          <tr><td><span class="ok">一手</span></td><td><b>Ashby 招聘 API</b>（职位/地点/发布时间）</td><td>API 直取</td></tr>
-          <tr><td><span class="ok">一手</span></td><td><b>域名元数据</b> RDAP / Verisign / CertSpotter</td><td>注册时间线</td></tr>
-          <tr><td><span class="ok">一手</span></td><td><b>TechCrunch 8/5 原报道</b> + Jeff Dean 官宣推文</td><td>全文</td></tr>
-          <tr><td><span class="ok">一手</span></td><td><b>Jeff Dean 告别信全文</b>（X 推文 4 张截图）</td><td>用户一手提供 2026-08-08</td></tr>
-          <tr><td><span class="ok">一手</span></td><td><b>Jeff Dean X 推文截图</b>（官宣/循环图/NAE/融资幻灯片/BP 四页）</td><td>用户一手提供 2026-08-08</td></tr>
-          <tr><td><span class="ok">一手</span></td><td><b>推文截图</b>（Jules Qiu 领投 / Khosla 发帖）</td><td>量子位报道原图（无用户一手版）</td></tr>
-          <tr><td><span class="warn">外部</span></td><td><b>FutureSearch 预测</b>（8/6 独立分析，非一手）</td><td>🟡 仅作参考标尺</td></tr>
-          <tr><td><span class="warn">转引</span></td><td>Axios「数亿美元」融资规模（知情人士，量子位转引）</td><td>🟡 未官方确认</td></tr>
-          <tr><td><span class="warn">转引</span></td><td>量子位 BP 三页文字拆解（记者亲见 BP）</td><td>🟡 与图片原件交叉验证一致</td></tr>
-          <tr><td><span class="bad">负结果</span></td><td>SEC EDGAR Form D 检索 0 命中 → 种子轮未 close 或低于申报门槛</td><td>负结果=证据</td></tr>
-          <tr><td><span class="bad">未解</span></td><td>.ai 域名 2025-12 注册之谜 / Axios 原文直取（VPC 阻断）</td><td>已如实标注</td></tr>
-        </tbody>
-      </table>
-      </div>
-    </details>
-    <div class="callout co-red"><b>反方自检：</b>①BP 图片是媒体截图非原始 PDF（Yellow）②Axios 金额未官方确认（Yellow）③. ai 注册之谜未解（Yellow）。核心承重柱（官网全文 + Wired + Google 官方 + BP 图片）四方独立印证，风险可控。</div>
-  </div>
-</section>
-
-<footer>
-  <div class="row"><b>Discovery Loop</b> · 深度解读专题</div>
-  <div class="row">信源：discoveryloop.com · Wired · Google Blog · TechCrunch · 量子位 · Ashby · RDAP · CertSpotter</div>
-  <div class="row">存档：archive/discovery-loop/ · 2026-08-08</div>
 </footer>
 
-
-<div class="lightbox" id="lightbox">
-  <span class="lb-close" id="lbClose">×</span>
-  <img id="lbImg" src="" alt="BP 页面放大">
-  <div class="lb-cap" id="lbCap"></div>
-</div>
-
-
-<button class="back-top" id="backTop" aria-label="返回顶部">↑</button>
-
 <script>
+/* ── 进度条 ── */
 (function(){
-  // ===== Progress bar =====
-  var bar = document.getElementById('progressBar');
-  var onScroll = function(){
-    var h = document.documentElement;
-    var max = h.scrollHeight - h.clientHeight;
-    var p = max > 0 ? (h.scrollTop / max * 100) : 0;
-    bar.style.width = p + '%';
-    // back to top
-    var bt = document.getElementById('backTop');
-    if (h.scrollTop > 600) bt.classList.add('show'); else bt.classList.remove('show');
-    // nav active state
-    var links = document.querySelectorAll('.nav-links a');
-    var cur = '';
+  var bar=document.getElementById('progressBar');
+  var onScroll=function(){
+    var h=document.documentElement;
+    var max=h.scrollHeight-h.clientHeight;
+    bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';
+    // nav active
+    var links=document.querySelectorAll('.nav-links a');
+    var cur='';
     document.querySelectorAll('section[id]').forEach(function(sec){
-      if (sec.getBoundingClientRect().top <= 120) cur = sec.id;
+      if(sec.getBoundingClientRect().top<=120)cur=sec.id;
     });
     links.forEach(function(a){
-      a.classList.toggle('active', a.dataset.sec === cur);
+      a.classList.toggle('on',a.getAttribute('href')==='#'+cur);
     });
   };
-  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('scroll',onScroll,{passive:true});
   onScroll();
+})();
 
-  // ===== Burger menu =====
-  var burger = document.getElementById('navBurger');
-  var navLinks = document.getElementById('navLinks');
-  burger.addEventListener('click', function(){
-    navLinks.classList.toggle('open');
-  });
-  navLinks.addEventListener('click', function(e){
-    if (e.target.tagName === 'A') navLinks.classList.remove('open');
-  });
-
-  // ===== Back to top =====
-  document.getElementById('backTop').addEventListener('click', function(){
-    window.scrollTo({top:0, behavior:'smooth'});
-  });
-
-  // ===== Lightbox =====
-  var lb = document.getElementById('lightbox');
-  var lbImg = document.getElementById('lbImg');
-  var lbCap = document.getElementById('lbCap');
-  document.querySelectorAll('.frame[data-lb]').forEach(function(frame){
-    frame.addEventListener('click', function(){
-      lbImg.src = frame.dataset.lb;
-      lbCap.textContent = frame.dataset.cap || '';
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-  document.querySelectorAll('.t-img img').forEach(function(img){
-    img.addEventListener('click', function(){
-      lbImg.src = img.getAttribute('src');
-      lbCap.textContent = img.getAttribute('alt') || '';
-      lb.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    });
-    img.style.cursor = 'zoom-in';
-  });
-  function closeLb(){
-    lb.classList.remove('open');
-    document.body.style.overflow = '';
+/* ── 滚动进入动画 ── */
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(el){el.classList.add('on')});
+    return;
   }
-  document.getElementById('lbClose').addEventListener('click', closeLb);
-  lb.addEventListener('click', function(e){
-    if (e.target === lb) closeLb();
-  });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') closeLb();
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}
+    });
+  },{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(el){io.observe(el)});
+})();
+
+/* ── 图片点击放大（lightbox）── */
+(function(){
+  var cards=document.querySelectorAll('.img-card');
+  var lb=document.createElement('div');
+  lb.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:200;display:none;align-items:center;justify-content:center;cursor:zoom-out;padding:24px';
+  var lbImg=document.createElement('img');
+  lbImg.style.cssText='max-width:95vw;max-height:92vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.6)';
+  lb.appendChild(lbImg);
+  lb.addEventListener('click',function(){lb.style.display='none'});
+  document.body.appendChild(lb);
+  cards.forEach(function(c){
+    c.addEventListener('click',function(){
+      var img=c.querySelector('img');
+      if(!img)return;
+      lbImg.src=img.src;
+      lb.style.display='flex';
+    });
   });
 })();
 </script>
-
 </body>
 </html>
