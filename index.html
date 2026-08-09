@@ -255,6 +255,57 @@ footer b{color:var(--ink-dim)}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+
+/* ===== v10: PART DIVIDER ===== */
+.part{display:flex;align-items:center;gap:14px;margin:64px 0 -8px;padding:0 4px}
+.part::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line2),transparent)}
+.part-no{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--gold);background:rgba(212,169,78,.08);border:1px solid rgba(212,169,78,.25);padding:4px 12px;border-radius:999px;white-space:nowrap}
+.part-name{font-size:13px;color:var(--ink-faint);letter-spacing:.08em}
+/* ===== v10: TLDR ===== */
+.tldr{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative;top:-34px}
+.tldr-item{background:var(--card);border:1px solid var(--line2);border-radius:var(--radius);padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
+.tldr-k{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.1em;flex-shrink:0;padding-top:2px}
+.tldr-v{font-size:13.5px;color:var(--ink-dim);line-height:1.6}
+.tldr-v b{color:var(--ink)}
+/* ===== v10: FOUNDERS TOP ===== */
+.founders-top{display:grid;grid-template-columns:55% 1fr;gap:18px;margin-bottom:34px;align-items:stretch}
+.founders-top .founder-group-shot{margin-top:0}
+.founder-summary{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;display:flex;flex-direction:column;justify-content:center}
+.founder-summary .num{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.2em}
+.founder-summary h3{font-size:17px;color:var(--ink);margin:6px 0 12px}
+.founder-summary ul{list-style:none}
+.founder-summary li{font-size:13.8px;color:var(--ink-dim);padding:5px 0 5px 18px;position:relative}
+.founder-summary li::before{content:"▸";position:absolute;left:0;color:var(--gold)}
+.founder-summary li b{color:var(--gold-bright)}
+/* ===== v10: NAE 通栏 ===== */
+.nae-wrap .nae-card{max-width:760px;margin:0 auto}
+/* ===== v10: LETTER 2x2 ===== */
+.letter-grid{grid-template-columns:repeat(2,1fr)}
+/* ===== v10: BP 封面通栏 ===== */
+.bp-cover{margin-bottom:22px}
+.bp-cover .bp-card{max-width:860px;margin:0 auto}
+/* ===== v10: NAV MORE ===== */
+.nav-more{position:relative}
+.nav-more summary{cursor:pointer;color:var(--ink-dim);font-size:13px;padding:6px 10px;border-radius:6px;list-style:none;display:flex;align-items:center;gap:2px;white-space:nowrap}
+.nav-more summary::-webkit-details-marker{display:none}
+.nav-more summary:hover{color:var(--ink);background:rgba(212,169,78,.08)}
+.nav-more[open] summary{color:var(--gold-bright)}
+.nav-more-links{position:absolute;top:calc(100% + 8px);right:0;background:rgba(15,21,32,.98);backdrop-filter:blur(12px);border:1px solid var(--line2);border-radius:10px;padding:8px;min-width:150px;display:flex;flex-direction:column;gap:2px;box-shadow:0 12px 40px rgba(0,0,0,.5);z-index:950}
+.nav-more-links a{font-size:13px;padding:8px 12px;border-radius:6px;border-bottom:none;white-space:nowrap}
+.nav-more-links a:hover{background:rgba(212,169,78,.1)}
+@media (max-width:900px){
+  .tldr{grid-template-columns:1fr;top:0;margin-top:22px;padding:0 24px}
+  .founders-top{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .nav-more-links{position:static;background:transparent;border:none;box-shadow:none;padding:4px 0 4px 8px;min-width:0}
+}
+@media (max-width:640px){
+  .letter-grid{grid-template-columns:1fr}
+  .tldr{padding:0 16px}
+  .part{margin-top:44px}
+}
+
 </style>
 </head>
 <body>
@@ -268,15 +319,20 @@ footer b{color:var(--ink-dim)}
     <div class="nav-links" id="navLinks">
       <a href="#founders" data-sec="founders">创始人</a>
       <a href="#thesis" data-sec="thesis">核心命题</a>
-      <a href="#letter" data-sec="letter">告别信</a>
       <a href="#bp" data-sec="bp">BP 图解</a>
-      <a href="#voices" data-sec="voices">原话与推文</a>
-      <a href="#facts" data-sec="facts">公司基本盘</a>
-      <a href="#timeline" data-sec="timeline">时间线</a>
-      <a href="#chinese" data-sec="chinese">华人创业者</a>
       <a href="#analysis" data-sec="analysis">九个判断</a>
       <a href="#watch" data-sec="watch">观察清单</a>
-      <a href="#sources" data-sec="sources">信源声明</a>
+      <details class="nav-more"><summary>更多 ▾</summary>
+        <div class="nav-more-links">
+          <a href="#letter" data-sec="letter">告别信</a>
+          <a href="#voices" data-sec="voices">原话与推文</a>
+          <a href="#facts" data-sec="facts">公司基本盘</a>
+          <a href="#timeline" data-sec="timeline">时间线</a>
+          <a href="#biz" data-sec="biz">商业模式</a>
+          <a href="#chinese" data-sec="chinese">华人创业者</a>
+          <a href="#sources" data-sec="sources">信源声明</a>
+        </div>
+      </details>
     </div>
     <button class="nav-burger" id="navBurger" aria-label="菜单">☰</button>
   </div>
@@ -295,6 +351,15 @@ footer b{color:var(--ink-dim)}
   </div>
   <div class="scroll-hint">向下滚动</div>
 </header>
+<div class="tldr">
+  <div class="tldr-item"><span class="tldr-k">谁</span><span class="tldr-v"><b>四个造过 Google 基础设施的人</b>（Jeff Dean / Sanjay / Oriol / Quoc）</span></div>
+  <div class="tldr-item"><span class="tldr-k">做什么</span><span class="tldr-v"><b>自动化实验循环</b>：Propose → Run → Evaluate → 迭代，AI 研究 AI 的正循环</span></div>
+  <div class="tldr-item"><span class="tldr-k">凭什么信</span><span class="tldr-v">告别信 / BP 四页 / 官网 / Wired 四方一手证据 + 每个判断附反方自检</span></div>
+</div>
+
+
+
+<div class="part"><span class="part-no">PART I · 人物</span><span class="part-name">这四个人</span></div>
 
 
 <section id="founders">
@@ -304,9 +369,11 @@ footer b{color:var(--ink-dim)}
       <h2 class="sec-title">四位创始人</h2>
       <p class="sec-sub">共事 14–30 年，建造了 Google 二十年技术底座——这份 BP 的第一页和第二页就是他们自己的简历。</p>
     </div>
-    <div class="founder-group-shot" style="margin-bottom:34px">
+    <div class="founders-top"><div class="founder-group-shot">
       <div class="gs-frame" data-lb="founders_wired.webp" data-cap="左起 Jeff Dean → Oriol Vinyals → Quoc Le → Sanjay Ghemawat（2026-08）"><span class="zoom-hint">🔍 点击放大</span><img src="founders_wired.webp" alt="Discovery Loop 四位创始人合影"  width="1920" height="1280"></div>
       <div class="gs-cap">左起：Jeff Dean → Oriol Vinyals → Quoc Le → Sanjay Ghemawat · 2026-08-06</div>
+      </div>
+      <div class="founder-summary"><div class="num">FOUR FOUNDERS · ONE DECADE</div><h3>14–30 年共事 · Google 技术底座</h3><ul><li>四人共事 <b>14–30 年</b>，建造 Google 二十年技术底座——BP 第一二页就是他们的简历</li><li>Jeff Dean 带过 Research+AI 峰值 <b>~4400 人</b>，总引用 <b>&gt;42 万</b></li><li>Sanjay Ghemawat 分布式系统奠基人，总引用 <b>&gt;17 万</b></li><li>带出：Dario Amodei · Ilya Sutskever · Noam Shazeer · 杨植麟</li></ul></div>
     </div>
     <div class="founders-list">
       <div class="founder-row">
@@ -346,6 +413,9 @@ footer b{color:var(--ink-dim)}
 </section>
 
 
+<div class="part"><span class="part-no">PART II · 行动</span><span class="part-name">他们要做什么</span></div>
+
+
 <section id="thesis">
   <div class="wrap">
     <div class="sec-head">
@@ -375,8 +445,8 @@ footer b{color:var(--ink-dim)}
         </ul>
       </div>
     </div>
-    <div class="grid g2" style="margin-top:18px">
-      <div class="bp-card">
+    <div class="nae-wrap" style="margin-top:18px">
+      <div class="bp-card nae-card">
         <div class="frame" data-lb="nae_challenges.webp" data-cap="14 项 NAE Grand Challenges"><span class="zoom-hint">🔍 点击放大</span><img src="nae_challenges.webp" alt="NAE 14 项大挑战" width="1146" height="646"></div>
         <div class="body">
           <div class="num">原图</div>
@@ -394,55 +464,14 @@ footer b{color:var(--ink-dim)}
 </section>
 
 
-<section id="letter">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="sec-no">03</span>
-      <h2 class="sec-title">告别信：Jeff Dean 原话</h2>
-      <p class="sec-sub">2026-08-06 离职日，Jeff Dean 发布的告别信。这是公司成立动机的最权威陈述。</p>
-    </div>
-    <div class="letter-grid">
-      <div class="letter-item">
-        <div class="l-img" data-lb="letter_1.webp" data-cap="告别信 1/4：离职宣布 + 告别信开头"><span class="zoom-hint">🔍 放大</span><img src="letter_1.webp" alt="Jeff Dean 告别信 1/4"></div>
-        <div class="l-cap">1/4 · 官宣：离开 Google 27 年，与三位老友共创 DiscoLoopAI</div>
-      </div>
-      <div class="letter-item">
-        <div class="l-img" data-lb="letter_2.webp" data-cap="告别信 2/4：成立动机全文"><span class="zoom-hint">🔍 放大</span><img src="letter_2.webp" alt="Jeff Dean 告别信 2/4"></div>
-        <div class="l-cap">2/4 · 成立动机：AI 协作发现 + 自动化循环</div>
-      </div>
-      <div class="letter-item">
-        <div class="l-img" data-lb="letter_3.webp" data-cap="告别信 3/4：13 个十亿级产品"><span class="zoom-hint">🔍 放大</span><img src="letter_3.webp" alt="Jeff Dean 告别信 3/4"></div>
-        <div class="l-cap">3/4 · 13 个产品用户超 10 亿 · 25 人 → 190,000+ 人</div>
-      </div>
-      <div class="letter-item">
-        <div class="l-img" data-lb="letter_4.webp" data-cap="告别信 4/4：结尾致谢"><span class="zoom-hint">🔍 放大</span><img src="letter_4.webp" alt="Jeff Dean 告别信 4/4"></div>
-        <div class="l-cap">4/4 · 致谢 · 最后一天 8/6 · All the best, -Jeff</div>
-      </div>
-    </div>
-    <div class="letter-quote">
-      <div class="lq"><b>"</b>My longtime friends and collaborators Sanjay Ghemawat, Oriol Vinyals and Quoc Le and I have been excitedly discussing how AI collaborators can help discover new things with the right kinds of automated loops&hellip; we've decided to leave Google to co-found <b>Discovery Loop</b>, a new public benefit corporation whose mission is to automate machine learning, science, and engineering to accelerate discoveries and progress&hellip; we believe this approach can make meaningful progress against many of the <b>NAE Grand Challenge</b> problems<b>"</b></div>
-      <div class="lq-src">—— Jeff Dean 告别信原文（2026-08-06）</div>
-    </div>
-    <div class="bp-card" style="margin-top:18px">
-      <div class="frame" data-lb="dean_pichai.webp" data-cap="Jeff Dean 与 Sundar Pichai 击掌合影"><span class="zoom-hint">🔍 点击放大</span><img src="dean_pichai.webp" alt="Jeff Dean 与 Pichai 击掌合影" width="1922" height="1079"></div>
-      <div class="body">
-        <div class="num">团队文化</div>
-        <h3>与 Pichai 击掌告别</h3>
-        <p>告别信推文配图：全球多地协作与生活瞬间——伦敦/巴塔哥尼亚/越南/加州。Pichai 多轮挽留未果后祝福 + 投资 + 算力安排，体面分手。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 <section id="bp">
   <div class="wrap">
     <div class="sec-head">
-      <span class="sec-no">04</span>
+      <span class="sec-no">03</span>
       <h2 class="sec-title">BP 图解</h2>
       <p class="sec-sub">史上最「凡尔赛」的路演材料：没有商业模式、没有市场分析，就几页——「我们造过什么」「我们带过谁」「我们的影响力」。</p>
     </div>
-    <div class="bp-grid">
+    <div class="bp-cover">
       <div class="bp-card">
         <div class="frame" data-lb="img_00.webp" data-cap="BP 封面：DISCOVERY LOOP — Continuous Exploration"><span class="zoom-hint">🔍 点击放大</span><img src="img_00.webp" alt="BP 封面页"  width="1206" height="873"></div>
         <div class="body">
@@ -451,6 +480,8 @@ footer b{color:var(--ink-dim)}
           <p>“Automating discovery to accelerate science and engineering for the world.” 与官网首页逐字一致。</p>
         </div>
       </div>
+    </div>
+    <div class="bp-grid">
       <div class="bp-card">
         <div class="frame" data-lb="bp_p1_achievements.webp" data-cap="BP 第一页「我们一起造过什么」：四人成就概览"><span class="zoom-hint">🔍 点击放大</span><img src="bp_p1_achievements.webp" alt="BP 第一页：我们一起造过什么" width="1540" height="864"></div>
         <div class="body">
@@ -489,6 +520,50 @@ footer b{color:var(--ink-dim)}
     </details>
   </div>
 </section>
+
+
+<section id="letter">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-no">04</span>
+      <h2 class="sec-title">告别信：Jeff Dean 原话</h2>
+      <p class="sec-sub">2026-08-06 离职日，Jeff Dean 发布的告别信。这是公司成立动机的最权威陈述。</p>
+    </div>
+    <div class="letter-grid">
+      <div class="letter-item">
+        <div class="l-img" data-lb="letter_1.webp" data-cap="告别信 1/4：离职宣布 + 告别信开头"><span class="zoom-hint">🔍 放大</span><img src="letter_1.webp" alt="Jeff Dean 告别信 1/4"></div>
+        <div class="l-cap">1/4 · 官宣：离开 Google 27 年，与三位老友共创 DiscoLoopAI</div>
+      </div>
+      <div class="letter-item">
+        <div class="l-img" data-lb="letter_2.webp" data-cap="告别信 2/4：成立动机全文"><span class="zoom-hint">🔍 放大</span><img src="letter_2.webp" alt="Jeff Dean 告别信 2/4"></div>
+        <div class="l-cap">2/4 · 成立动机：AI 协作发现 + 自动化循环</div>
+      </div>
+      <div class="letter-item">
+        <div class="l-img" data-lb="letter_3.webp" data-cap="告别信 3/4：13 个十亿级产品"><span class="zoom-hint">🔍 放大</span><img src="letter_3.webp" alt="Jeff Dean 告别信 3/4"></div>
+        <div class="l-cap">3/4 · 13 个产品用户超 10 亿 · 25 人 → 190,000+ 人</div>
+      </div>
+      <div class="letter-item">
+        <div class="l-img" data-lb="letter_4.webp" data-cap="告别信 4/4：结尾致谢"><span class="zoom-hint">🔍 放大</span><img src="letter_4.webp" alt="Jeff Dean 告别信 4/4"></div>
+        <div class="l-cap">4/4 · 致谢 · 最后一天 8/6 · All the best, -Jeff</div>
+      </div>
+    </div>
+    <div class="letter-quote">
+      <div class="lq"><b>"</b>My longtime friends and collaborators Sanjay Ghemawat, Oriol Vinyals and Quoc Le and I have been excitedly discussing how AI collaborators can help discover new things with the right kinds of automated loops&hellip; we've decided to leave Google to co-found <b>Discovery Loop</b>, a new public benefit corporation whose mission is to automate machine learning, science, and engineering to accelerate discoveries and progress&hellip; we believe this approach can make meaningful progress against many of the <b>NAE Grand Challenge</b> problems<b>"</b></div>
+      <div class="lq-src">—— Jeff Dean 告别信原文（2026-08-06）</div>
+    </div>
+    <div class="bp-card" style="margin-top:18px">
+      <div class="frame" data-lb="dean_pichai.webp" data-cap="Jeff Dean 与 Sundar Pichai 击掌合影"><span class="zoom-hint">🔍 点击放大</span><img src="dean_pichai.webp" alt="Jeff Dean 与 Pichai 击掌合影" width="1922" height="1079"></div>
+      <div class="body">
+        <div class="num">团队文化</div>
+        <h3>与 Pichai 击掌告别</h3>
+        <p>告别信推文配图：全球多地协作与生活瞬间——伦敦/巴塔哥尼亚/越南/加州。Pichai 多轮挽留未果后祝福 + 投资 + 算力安排，体面分手。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="part"><span class="part-no">PART III · 证据</span><span class="part-name">凭什么信</span></div>
 
 
 <section id="voices">
@@ -654,6 +729,9 @@ footer b{color:var(--ink-dim)}
 </section>
 
 
+<div class="part"><span class="part-no">PART IV · 判断</span><span class="part-name">怎么看</span></div>
+
+
 <section id="chinese">
   <div class="wrap">
     <div class="sec-head">
@@ -763,6 +841,9 @@ footer b{color:var(--ink-dim)}
     </div>
   </div>
 </section>
+
+
+<div class="part"><span class="part-no">附录</span><span class="part-name">信源与方法</span></div>
 
 
 <section id="sources">
